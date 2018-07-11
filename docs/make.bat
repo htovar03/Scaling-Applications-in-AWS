@@ -9,7 +9,7 @@ if "%SPHINXBUILD%" == "" (
 )
 set SOURCEDIR=.
 set BUILDDIR=_build
-set SPHINXPROJ=f5-agility-labs-f5-in-aws-1
+set SPHINXPROJ=F5AgilityLabs
 
 if "%1" == "" goto help
 
