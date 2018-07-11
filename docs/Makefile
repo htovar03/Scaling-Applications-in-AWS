@@ -4,7 +4,7 @@
 # You can set these variables from the command line.
 SPHINXOPTS    =
 SPHINXBUILD   = sphinx-build
-SPHINXPROJ    = F5AgilityLabs
+SPHINXPROJ    = f5-agility-labs-f5-in-aws-1
 SOURCEDIR     = .
 BUILDDIR      = _build
 

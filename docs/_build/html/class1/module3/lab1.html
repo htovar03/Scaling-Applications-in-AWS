@@ -1,0 +1,166 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>2.3.1. Verify a healthy F5 environment &#8212; f5-agility-labs-f5-in-aws-1  documentation</title>
+    <link rel="stylesheet" href="../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="2.3.2. Configuration Utility (Web UI) access" href="lab2.html" />
+    <link rel="prev" title="2.3. Extending and Securing your Cloud" href="module3.html" />
+   
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="verify-a-healthy-f5-environment">
+<h1>2.3.1. Verify a healthy F5 environment<a class="headerlink" href="#verify-a-healthy-f5-environment" title="Permalink to this headline">¶</a></h1>
+<ol class="arabic simple">
+<li>Run the handy lab-info command to quickly identify the IP addresses assigned to your environment.</li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>lab-info
+</pre></div>
+</div>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>AWS Console
+ URL: https://f5agility2017.signin.aws.amazon.com/console?us-east-1
+Username: user02@f5.io / Password: B4Agility2017X4Y
+WAF ELB
+  URL: https://waf-user02f5io-1627564819.us-east-1.elb.amazonaws.com
+
+BIG-IP Autoscale Instance: waf-user02f5io
+  MGMT IP:      <span class="m">52</span>.207.200.169
+   STATUS:      MCPD is up, System Ready
+ MGMT URL:      https://52.207.200.169:8443
+      SSH:      ssh -o <span class="nv">UserKnownHostsFile</span><span class="o">=</span>/dev/null -o <span class="nv">StrictHostKeyChecking</span><span class="o">=</span>no  -o <span class="nv">ConnectTimeout</span><span class="o">=</span><span class="m">3</span> -i MyKeyPair-user02@f5.io.pem admin@52.207.200.169
+
+Big-IP1: ha-user02f5io-vpc-b7b1c7ce
+  MGMT IP:      <span class="m">34</span>.232.9.141
+   STATUS:      MCPD is up, System Ready
+ MGMT URL:      https://34.232.9.141
+      SSH:      ssh -o <span class="nv">UserKnownHostsFile</span><span class="o">=</span>/dev/null -o <span class="nv">StrictHostKeyChecking</span><span class="o">=</span>no  -o <span class="nv">ConnectTimeout</span><span class="o">=</span><span class="m">3</span> -i MyKeyPair-user02@f5.io.pem admin@34.232.9.141
+   VIP IP:      <span class="m">10</span>.0.1.223
+Elastic IP:     <span class="m">52</span>.6.236.56
+
+Big-IP2: ha-user02f5io-vpc-b7b1c7ce
+  MGMT IP:      <span class="m">34</span>.195.89.147
+   STATUS:      MCPD is up, System Ready
+ MGMT URL:      https://34.195.89.147
+      SSH:      ssh -o <span class="nv">UserKnownHostsFile</span><span class="o">=</span>/dev/null -o <span class="nv">StrictHostKeyChecking</span><span class="o">=</span>no  -o <span class="nv">ConnectTimeout</span><span class="o">=</span><span class="m">3</span> -i MyKeyPair-user02@f5.io.pem admin@34.195.89.147
+   VIP IP:      <span class="m">10</span>.0.2.238
+
+web-az1.0: user02f5io
+  PRIVATE IP:   <span class="m">10</span>.0.1.131
+
+web-az2.0: user02f5io
+  PRIVATE IP:   <span class="m">10</span>.0.2.219
+</pre></div>
+</div>
+<p>Sample output above. lab-info will quickly orient you around our deployment. All of the same information is available via the AWS Console, the lab-info script is here for convenience.</p>
+<blockquote>
+<div><ul class="simple">
+<li>We have an application behind an F5 autoscale WAF that can be reached by the WAF ELB URL.</li>
+<li>The web-az1.0 and webaz2.0 PRIVATE IP addresses will soon be configured as pool members for our Big-IP HA cluster.</li>
+<li>Big-IP1 and Big-IP2 are configured as a high availability cluster across two separate availability zones. Only the active Big-IP will have an Elastic IP address assigned. Configuration changes to the active unit will automatically propagate to the standby unit. During an outage, even one affecting an entire availability zone, the Elastic IP will ‘float’ over to the unit that is not affected.</li>
+<li>BIG-IP Autoscale Instance is a single NIC deployment WAF with the MGMT IP address identified.</li>
+</ul>
+</div></blockquote>
+<ol class="arabic simple" start="2">
+<li>From the f5-super-netops container test out application behind the auto-scale waf is up. Replace the example https url with the one specific to your lab. See lab-info.</li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>curl -kI https://waf-user01f5io-499431932.us-east-1.elb.amazonaws.com
+</pre></div>
+</div>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>HTTP/1.1 <span class="m">200</span> OK
+Accept-Ranges: bytes
+Content-Type: text/html
+Date: Sat, <span class="m">29</span> Jul <span class="m">2017</span> <span class="m">15</span>:50:12 GMT
+Set-Cookie: <span class="nv">TS01e70004</span><span class="o">=</span>01eeb64b413ca1778c867b0174b4a4e8901d5361c37a2ef5634917272e2f6f9b77d14ed447d3903a5e45d1aeb723a0af78bd798f1a<span class="p">;</span> <span class="nv">Path</span><span class="o">=</span>/
+X-COLOR: a0bf37
+Connection: keep-alive
+</pre></div>
+</div>
+<p>…The HTTP/1.1 200 OK status code is a sign that things went well. You can hit the example site behind the F5 WAF with a web browser.</p>
+<a class="reference internal image-reference" href="../../_images/waf-example-site.png"><img alt="../../_images/waf-example-site.png" src="../../_images/waf-example-site.png" style="width: 735.0px; height: 653.0px;" /></a>
+<p>We can now start configuring the Big-IPs to responsibly fulfill our part of the shared responsibility security model: <a class="reference external" href="https://aws.amazon.com/compliance/shared-responsibility-model/">https://aws.amazon.com/compliance/shared-responsibility-model/</a></p>
+<img alt="https://d0.awsstatic.com/security-center/NewSharedResponsibilityModel.png" src="https://d0.awsstatic.com/security-center/NewSharedResponsibilityModel.png" />
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../index.html">Documentation overview</a><ul>
+  <li><a href="../class1.html">2. Class - |classname|</a><ul>
+  <li><a href="module3.html">2.3. Extending and Securing your Cloud</a><ul>
+      <li>Previous: <a href="module3.html" title="previous chapter">2.3. Extending and Securing your Cloud</a></li>
+      <li>Next: <a href="lab2.html" title="next chapter">2.3.2. Configuration Utility (Web UI) access</a></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../../_sources/class1/module3/lab1.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2018, Tony Marfil.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.7.5</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.11</a>
+      
+      |
+      <a href="../../_sources/class1/module3/lab1.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

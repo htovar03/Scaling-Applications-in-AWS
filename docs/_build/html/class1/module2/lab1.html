@@ -1,0 +1,201 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>2.2.1. Explore the F5 / AWS lab environment &#8212; f5-agility-labs-f5-in-aws-1  documentation</title>
+    <link rel="stylesheet" href="../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="2.3. Extending and Securing your Cloud" href="../module3/module3.html" />
+    <link rel="prev" title="2.2. Exploring AWS" href="module2.html" />
+   
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="explore-the-f5-aws-lab-environment">
+<h1>2.2.1. Explore the F5 / AWS lab environment<a class="headerlink" href="#explore-the-f5-aws-lab-environment" title="Permalink to this headline">¶</a></h1>
+<ol class="arabic simple">
+<li>Use the alias aws console link, email address, and shortUrl as password to login to the aws console.</li>
+</ol>
+<a class="reference internal image-reference" href="../../_images/aws-console-login1.png"><img alt="../../_images/aws-console-login1.png" src="../../_images/aws-console-login1.png" style="width: 234.0px; height: 45.0px;" /></a>
+<a class="reference internal image-reference" href="../../_images/aws-console-login2.png"><img alt="../../_images/aws-console-login2.png" src="../../_images/aws-console-login2.png" style="width: 322.5px; height: 238.0px;" /></a>
+<p><a class="reference external" href="https://f5agility2017.signin.aws.amazon.com/console?region=ap-southeast-1">https://f5agility2017.signin.aws.amazon.com/console?region=ap-southeast-1</a></p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="33%" />
+<col width="68%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Parameter</th>
+<th class="head">value</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Account:</td>
+<td>f5agility2017</td>
+</tr>
+<tr class="row-odd"><td>User Name:</td>
+<td><a class="reference external" href="mailto:userxx&#37;&#52;&#48;f5demo&#46;com">userxx<span>&#64;</span>f5demo<span>&#46;</span>com</a>, change xx to your student number</td>
+</tr>
+<tr class="row-even"><td>Password:</td>
+<td>sames as shortUrl / echo $shortUrl</td>
+</tr>
+</tbody>
+</table>
+<ol class="arabic simple" start="2">
+<li>Navigate to Services =&gt; Networking &amp; Content Delivery =&gt; VPC. Click on # VPCs. In the search field type your user account name. You should see your VPC details. VPC stands for virtual private cloud, this is the slice of the amazon cloud that has been dedicated for your lab environment.</li>
+<li>In the upper right-hand corner, ensure you are in the correct region. For example: N. Virginia region (us-east-1) is the default.</li>
+</ol>
+<a class="reference internal image-reference" href="../../_images/aws-console-vpc.png"><img alt="../../_images/aws-console-vpc.png" src="../../_images/aws-console-vpc.png" style="width: 846.5px; height: 156.5px;" /></a>
+<ol class="arabic simple" start="4">
+<li>Navigate to Services =&gt; Compute =&gt; EC2 =&gt; INSTANCES =&gt; Instances. The web application is hosted on webaz1.0 in one availability zone and webaz2.0 in another availability zone. Highlight web-az1.0, in the “Description” tab below note the availability zone. Highlight web-az2.0 and do the same. Select the Tags tab for web-az1.0 and web-az2.0. We will use these tags later in the lab to autodiscover these instances as pool members from a Big-IP VE.</li>
+</ol>
+<a class="reference internal image-reference" href="../../_images/aws-console-ec2-az.png"><img alt="../../_images/aws-console-ec2-az.png" src="../../_images/aws-console-ec2-az.png" style="width: 852.0px; height: 621.0px;" /></a>
+<ol class="arabic simple" start="5">
+<li>Three Big-IP virtual editions are running:<ul>
+<li>BIGIP1 and BIGIP2 are in a cross-availability zone cluster that was deployed via a CloudFormation template.</li>
+<li>BIG-IP Autoscale Instance is the first F5 web application firewall provisioned for Application Security Manager with a low, medium, or high starter policy enabled. Depending on configurable traffic thresholds the WAF will scale from 1 to N instances. These thresholds are controlled via an auto scale group policy.</li>
+</ul>
+</li>
+<li>Cloud-init. Version 13 of Big-IP supports cloud-init. Right click on BIGIP1 =&gt; Instance Settings =&gt; View/Change User Data. Cloud-init is the industry standard way to inject commands into an F5 cloud image to automate all aspects of the on-boarding process: <a class="reference external" href="https://cloud-init.io/">https://cloud-init.io/</a>.</li>
+</ol>
+<a class="reference internal image-reference" href="../../_images/aws-console-cloud-init1.png"><img alt="../../_images/aws-console-cloud-init1.png" src="../../_images/aws-console-cloud-init1.png" style="width: 860.5px; height: 344.0px;" /></a>
+<a class="reference internal image-reference" href="../../_images/aws-console-cloud-init2.png"><img alt="../../_images/aws-console-cloud-init2.png" src="../../_images/aws-console-cloud-init2.png" style="width: 335.5px; height: 198.0px;" /></a>
+<ol class="arabic simple" start="7">
+<li>Services =&gt; Compute =&gt; EC2 =&gt; AUTO SCALING =&gt; Auto Scaling Groups.
+- In the search filter enter your username. Highlight the waf… auto scaling group.
+- Under the “Scaling Policies” tab below review the policy for scaling up and scaling down.</li>
+<li>Services =&gt; Compute =&gt; EC2 =&gt; LOAD BALANCING =&gt; Load Balancers. In the search filter enter your username. You should see your newly created elastic load balancers running.<ul>
+<li>Choose the tf-elb-userXX load balancer and highlight the “Instances” tab below. This is the load balancer that is in front of your simple web application hosted on web-az1.0 and web-az2.0.</li>
+<li>Choose the waf-userXX load balancer and highlight the “Instances” tab below. This is the load balancer that is in front of your F5 web application firewall(s).</li>
+</ul>
+</li>
+</ol>
+<a class="reference internal image-reference" href="../../_images/aws-console-elb1.png"><img alt="../../_images/aws-console-elb1.png" src="../../_images/aws-console-elb1.png" style="width: 858.5px; height: 611.0px;" /></a>
+<a class="reference internal image-reference" href="../../_images/aws-console-elb2.png"><img alt="../../_images/aws-console-elb2.png" src="../../_images/aws-console-elb2.png" style="width: 855.0px; height: 623.5px;" /></a>
+<ol class="arabic simple" start="9">
+<li>GitHub. Fully supported F5 Networks Solutions are hosted in the official F5 Networks GitHub repository:<ul>
+<li><a class="reference external" href="https://github.com/f5networks">https://github.com/f5networks</a></li>
+<li>We are running the lab from the f5-super-devops container: <a class="reference external" href="https://github.com/f5devcentral/f5-super-netops-container">https://github.com/f5devcentral/f5-super-netops-container</a></li>
+<li>AWS CloudFormation templates: <a class="reference external" href="https://github.com/F5Networks/f5-aws-cloudformation">https://github.com/F5Networks/f5-aws-cloudformation</a></li>
+<li>Native template formats are also available for Microsoft Azure (arm templates): <a class="reference external" href="https://github.com/F5Networks/f5-azure-arm-templates">https://github.com/F5Networks/f5-azure-arm-templates</a></li>
+<li>Native template formats are also available for Google Cloud Platform (gdm templates): <a class="reference external" href="https://github.com/F5Networks/f5-google-gdm-templates">https://github.com/F5Networks/f5-google-gdm-templates</a></li>
+</ul>
+</li>
+</ol>
+<a class="reference internal image-reference" href="../../_images/f5-github.png"><img alt="../../_images/f5-github.png" src="../../_images/f5-github.png" style="width: 689.5px; height: 665.0px;" /></a>
+<ol class="arabic simple" start="10">
+<li>CloudFormation Templates mock walk-through. CloudFormation templates are the AWS declarative method to deploy full application stacks to AWS.</li>
+</ol>
+<p>F5 Virtual Edition can be deployed via CloudFormation Templates and are an F5 officially supported deployment method.</p>
+<p>During the previous lab you deployed via Terraform the following F5 CFT Solution.</p>
+<ul class="simple">
+<li>“Deploying the BIG-IP in AWS - Clustered 2-NIC across Availability Zones” which supports automatic Big-IQ Licensing (we opted to use hourly billing in the previous lab):</li>
+</ul>
+<p><a class="reference external" href="https://github.com/F5Networks/f5-aws-cloudformation/tree/master/supported/cluster/2nic/across-az-ha">https://github.com/F5Networks/f5-aws-cloudformation/tree/master/supported/cluster/2nic/across-az-ha</a></p>
+<a class="reference internal image-reference" href="../../_images/aws-2nic-cluster-across-azs.png"><img alt="../../_images/aws-2nic-cluster-across-azs.png" src="../../_images/aws-2nic-cluster-across-azs.png" style="width: 471.0px; height: 289.5px;" /></a>
+<p>…you also deployed:</p>
+<ul class="simple">
+<li>Auto scaling the BIG-IP VE Web Application Firewall in AWS:</li>
+</ul>
+<p><a class="reference external" href="https://github.com/F5Networks/f5-aws-cloudformation/tree/master/supported/solutions/autoscale/waf/">https://github.com/F5Networks/f5-aws-cloudformation/tree/master/supported/solutions/autoscale/waf/</a></p>
+<a class="reference internal image-reference" href="../../_images/config-diagram-autoscale-waf.png"><img alt="../../_images/config-diagram-autoscale-waf.png" src="../../_images/config-diagram-autoscale-waf.png" style="width: 550.0px; height: 350.0px;" /></a>
+<ol class="arabic simple" start="11">
+<li>Go to <a class="reference external" href="https://github.com/F5Networks/f5-aws-cloudformation/tree/master/supported/cluster/2nic/across-az-ha">https://github.com/F5Networks/f5-aws-cloudformation/tree/master/supported/cluster/2nic/across-az-ha</a>.</li>
+<li>Scroll to and then click the “Launch Stack” icon for “Hourly…”</li>
+</ol>
+<a class="reference internal image-reference" href="../../_images/cft1.png"><img alt="../../_images/cft1.png" src="../../_images/cft1.png" style="width: 493.5px; height: 274.5px;" /></a>
+<ol class="arabic simple" start="13">
+<li>In the “Create Stack” screen, click “Next”.</li>
+</ol>
+<a class="reference internal image-reference" href="../../_images/cft2.png"><img alt="../../_images/cft2.png" src="../../_images/cft2.png" style="width: 848.5px; height: 357.5px;" /></a>
+<ol class="arabic simple" start="14">
+<li>This will render the template from within the AWS console. Fill in the first few parameters by choosing from the drop-down menus. The options present were created previously via Terraform. No need to complete the CloudFormation stack here. Terraform has already stuffed these parameters and fired off the completed CloudFormation template. Think about how many steps we’ve saved by fully automating the solution. Scroll down and click “Cancel”</li>
+</ol>
+<a class="reference internal image-reference" href="../../_images/cft3.png"><img alt="../../_images/cft3.png" src="../../_images/cft3.png" style="width: 693.5px; height: 656.5px;" /></a>
+<ol class="arabic simple" start="15">
+<li>Track things are going well in the AWS management console: Services =&gt; Management Tools =&gt; CloudFormation template. When done, both of your deployed CloudFormation templates will be Status: CREATE_COMPLETE. Here you can expand and review the steps or troubleshoot if something went wrong.</li>
+</ol>
+<a class="reference internal image-reference" href="../../_images/aws-console-cloudformation.png"><img alt="../../_images/aws-console-cloudformation.png" src="../../_images/aws-console-cloudformation.png" style="width: 834.5px; height: 210.0px;" /></a>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../index.html">Documentation overview</a><ul>
+  <li><a href="../class1.html">2. Class - |classname|</a><ul>
+  <li><a href="module2.html">2.2. Exploring AWS</a><ul>
+      <li>Previous: <a href="module2.html" title="previous chapter">2.2. Exploring AWS</a></li>
+      <li>Next: <a href="../module3/module3.html" title="next chapter">2.3. Extending and Securing your Cloud</a></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../../_sources/class1/module2/lab1.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2018, Tony Marfil.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.7.5</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.11</a>
+      
+      |
+      <a href="../../_sources/class1/module2/lab1.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

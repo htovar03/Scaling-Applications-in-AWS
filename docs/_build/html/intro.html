@@ -1,0 +1,188 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>1. Getting Started &#8212; f5-agility-labs-f5-in-aws-1  documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="2. Class - |classname|" href="class1/class1.html" />
+    <link rel="prev" title="F5 Agility Labs - Index" href="index.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="getting-started">
+<h1>1. Getting Started<a class="headerlink" href="#getting-started" title="Permalink to this headline">¶</a></h1>
+<p>Your instructor will provide you a URL where you can access your Windows  jumphost.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">All work for this lab will be performed exclusively from the Windows
+jumphost. No installation or interaction with your local system is
+required.</p>
+</div>
+<div class="section" id="lab-topology">
+<h2>1.1. Lab Topology<a class="headerlink" href="#lab-topology" title="Permalink to this headline">¶</a></h2>
+<p>Before you start the lab you will have an empty environment.  You will be building out the following topology.</p>
+<div class="section" id="network-topology">
+<h3>1.1.1. Network Topology<a class="headerlink" href="#network-topology" title="Permalink to this headline">¶</a></h3>
+<a class="reference internal image-reference" href="_static/f5-public-cloud-network-toplogy.png"><img alt="_static/f5-public-cloud-network-toplogy.png" src="_static/f5-public-cloud-network-toplogy.png" /></a>
+<p>The following components will be built in your lab environment:</p>
+<ul class="simple">
+<li>1-2 x F5-BIG VE WAF (v12.1.2) - Auto Scale WAF</li>
+<li>2 x F5 BIG-IP VE (v13.0) - Active/Standby cross-AZ deployment</li>
+<li>2 x Linux Webserver (Amazon Linux AMI)</li>
+</ul>
+</div>
+</div>
+<div class="section" id="automation-tools">
+<h2>1.2. Automation Tools<a class="headerlink" href="#automation-tools" title="Permalink to this headline">¶</a></h2>
+<p>During the lab you will be using multiple automation tools.</p>
+<p>Without these automation tools you would be required to perform many tasks in precise sequence.</p>
+<a class="reference internal image-reference" href="_static/no-automation.png"><img alt="_static/no-automation.png" src="_static/no-automation.png" /></a>
+<p>Using Automation we can simplify this proces to create a faster, safer, and more secure solution.</p>
+<a class="reference internal image-reference" href="_static/automation-pipeline.png"><img alt="_static/automation-pipeline.png" src="_static/automation-pipeline.png" /></a>
+<p>By chaining together multiple declarative interfaces and tools.</p>
+<a class="reference internal image-reference" href="_static/declarative-interfaces.png"><img alt="_static/declarative-interfaces.png" src="_static/declarative-interfaces.png" /></a>
+<div class="section" id="hashicorp-terraform">
+<h3>1.2.1. HashiCorp Terraform<a class="headerlink" href="#hashicorp-terraform" title="Permalink to this headline">¶</a></h3>
+<p>HashiCorp Terraform is used to create the underlying Network environment, deploy the Linux Webservers, and deploy F5 BIG-IP via AWS Cloud Formation Templates.</p>
+</div>
+<div class="section" id="amazon-cloud-formation-templates">
+<h3>1.2.2. Amazon Cloud Formation Templates<a class="headerlink" href="#amazon-cloud-formation-templates" title="Permalink to this headline">¶</a></h3>
+<p>Amazon Cloud Formation Templates (CFT) are used to deploy F5 BIG-IP resources.  In addition to deploying the F5 BIG-IP VE, the CFT template also manages Elastic Network Interfaces (ENI), Security Groups, EC2 Instance Roles, and other cloud native services.</p>
+<p>F5 Provides Supported Cloud Formation Templates that customers can leverage in their AWS environments.  The lab will deploy two of these solutions.</p>
+<ol class="arabic simple">
+<li>Auto Scale WAF</li>
+<li>Active/Standby Pair Across two AWS Availability Zones (AZ)</li>
+</ol>
+</div>
+<div class="section" id="f5-super-netops-container">
+<h3>1.2.3. F5 Super NetOps Container<a class="headerlink" href="#f5-super-netops-container" title="Permalink to this headline">¶</a></h3>
+<p>To simplify the installation of these Automation Tools (Terraform/CFT) we will use the F5 Super NetOps Container to provide a consistent environment for running the lab.</p>
+</div>
+</div>
+<div class="section" id="connecting-to-the-lab-environment">
+<h2>1.3. Connecting to the Lab Environment<a class="headerlink" href="#connecting-to-the-lab-environment" title="Permalink to this headline">¶</a></h2>
+<p>Your instructor will provide directions on how to connect to the Ravello Portal.</p>
+<div class="section" id="ravello-portal">
+<h3>1.3.1. Ravello Portal<a class="headerlink" href="#ravello-portal" title="Permalink to this headline">¶</a></h3>
+<p>On the Ravello Portal page click on the RDP link.</p>
+<img alt="_static/rdp-ravello-portal.png" src="_static/rdp-ravello-portal.png" />
+<p>The username / password for the RDP connection will be visible below the link.</p>
+</div>
+<div class="section" id="launching-putty">
+<h3>1.3.2. Launching Putty<a class="headerlink" href="#launching-putty" title="Permalink to this headline">¶</a></h3>
+<p>On the Windows Jumphost Desktop you should see a icon for Putty.</p>
+<img alt="_static/putty-link.png" src="_static/putty-link.png" />
+<p>Double click on it.  Click on “docker” then “Load” followed by “Open”.</p>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">Ignore any SSH key errors that you see.</p>
+</div>
+<a class="reference internal image-reference" href="_static/putty-load.png"><img alt="_static/putty-load.png" src="_static/putty-load.png" /></a>
+<p>You should see a Putty window.</p>
+<a class="reference internal image-reference" href="_static/putty-window.png"><img alt="_static/putty-window.png" src="_static/putty-window.png" /></a>
+<p>You are now ready to proceed with the lab.</p>
+</div>
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">1. Getting Started</a><ul>
+<li><a class="reference internal" href="#lab-topology">1.1. Lab Topology</a><ul>
+<li><a class="reference internal" href="#network-topology">1.1.1. Network Topology</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#automation-tools">1.2. Automation Tools</a><ul>
+<li><a class="reference internal" href="#hashicorp-terraform">1.2.1. HashiCorp Terraform</a></li>
+<li><a class="reference internal" href="#amazon-cloud-formation-templates">1.2.2. Amazon Cloud Formation Templates</a></li>
+<li><a class="reference internal" href="#f5-super-netops-container">1.2.3. F5 Super NetOps Container</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#connecting-to-the-lab-environment">1.3. Connecting to the Lab Environment</a><ul>
+<li><a class="reference internal" href="#ravello-portal">1.3.1. Ravello Portal</a></li>
+<li><a class="reference internal" href="#launching-putty">1.3.2. Launching Putty</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="index.html" title="previous chapter">F5 Agility Labs - Index</a></li>
+      <li>Next: <a href="class1/class1.html" title="next chapter">2. Class - |classname|</a></li>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/intro.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2018, Tony Marfil.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.7.5</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.11</a>
+      
+      |
+      <a href="_sources/intro.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
