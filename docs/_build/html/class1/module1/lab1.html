@@ -15,7 +15,7 @@
   <meta name="kb_doc_type" content="Manual"/>
   <meta name="kb_doc_type" content="User Guide"/>
   <meta name="title" content="2.1.1. Connecting to the Lab"/>
-  <meta name="product" content="F5 Public Cloud Architectures - F5 in AWS I"/>
+  <meta name="product" content="F5 Public Cloud Architectures - F5 in AWS II"/>
   <meta name="version" content=""/>
   <meta name="updated_date"  content="None"/>
   <meta name="archived" content="Archived documents excluded"/>
@@ -36,7 +36,7 @@
   <head>
     <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>2.1.1. Connecting to the Lab &#8212; F5 Public Cloud Architectures - F5 in AWS I  documentation</title>
+    <title>2.1.1. Connecting to the Lab &#8212; F5 Public Cloud Architectures - F5 in AWS II  documentation</title>
     <link rel="stylesheet" href="../../_static/css/bootstrap.min.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/css/f5_agility_theme.css" type="text/css" />
@@ -61,7 +61,7 @@
     </div>
     <div id="sidebar" class="section-nav">
       <nav class="nav-sidebartoc">
-        <h5>F5 Public Cloud Architectures - F5 in AWS I  documentation </h5>
+        <h5>F5 Public Cloud Architectures - F5 in AWS II  documentation </h5>
 <div id="searchbox" role="search">
   <form class="search" action="../../search.html" method="get">
     <input type="text" class="search" name="q" placeholder=" Search..." />
@@ -77,12 +77,13 @@
             <ul>
 <li><a class="reference internal" href="#">2.1.1. Connecting to the Lab</a></li>
 <li><a class="reference internal" href="#lab-variables">2.1.2. Lab Variables</a></li>
-<li><a class="reference internal" href="#run-docker">2.1.3. Run Docker</a></li>
-<li><a class="reference internal" href="#set-variables">2.1.4. Set Variables</a></li>
-<li><a class="reference internal" href="#initialize-your-lab-environment">2.1.5. Initialize your Lab Environment</a></li>
-<li><a class="reference internal" href="#launch-terraform">2.1.6. Launch Terraform</a></li>
-<li><a class="reference internal" href="#what-just-happened-that-was-a-lot-of-random-text-scrolling-in-my-docker-console">2.1.7. What just happened? That was a lot of random text scrolling in my Docker console!</a></li>
-<li><a class="reference internal" href="#video-example">2.1.8. Video example</a></li>
+<li><a class="reference internal" href="#launch-remote-desktop-session-to-linux">2.1.3. Launch Remote Desktop Session to Linux</a></li>
+<li><a class="reference internal" href="#ssh-to-the-f5-super-netops-docker-container">2.1.4. SSH to the F5-Super-NetOps docker container</a></li>
+<li><a class="reference internal" href="#set-variables">2.1.5. Set Variables</a></li>
+<li><a class="reference internal" href="#initialize-your-lab-environment">2.1.6. Initialize your Lab Environment</a></li>
+<li><a class="reference internal" href="#launch-terraform">2.1.7. Launch Terraform</a></li>
+<li><a class="reference internal" href="#f5-aws-lab-test-application">2.1.8. F5 AWS Lab Test application</a></li>
+<li><a class="reference internal" href="#what-just-happened">2.1.9. What just happened?</a></li>
 </ul>
 
          </span>
@@ -92,12 +93,18 @@
             <p class="caption"><span class="caption-text">Contents:</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../../intro.html">1. Getting Started</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="../class1.html">2. Class - F5 Public Cloud Architectures - F5 in AWS I</a><ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../class1.html">2. Class - F5 Public Cloud Architectures - F5 in AWS II</a><ul class="current">
 <li class="toctree-l2 current"><a class="reference internal" href="module1.html">2.1. Infrastructure As Code</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../module2/module2.html">2.2. Exploring AWS</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../module3/module3.html">2.3. Extending and Securing your Cloud</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../module4/module4.html">2.4. Troubleshooting Guide</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../module5/module5.html">2.5. Run the lab on your own</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../module3/module3.html">2.3. F5 Networks AWS WAF Rules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../module4/module4.html">2.4. Create a Virtual Server to Protect your Web Applications</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../module5/module5.html">2.5. Declarative Virtual Server with Application Services Extension 3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../module6/module6.html">2.6. F5 Networks IPSec VPN to AWS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../module7/module7.html">2.7. Big-IQ 6.0 and Application Templates for AWS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../module8/module8.html">2.8. Big-IP Cloud Edition:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../module9/module9.html">2.9. Create a Service Scaling Group Application:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../module_10/module_10.html">2.10. Test Autoscaling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../module_11/module_11.html">2.11. Clean up environment</a></li>
 </ul>
 </li>
 </ul>
@@ -115,7 +122,7 @@
     <article class="docs-container site-article-inner">
             <nav class="site-breadcrumb-nav site-nav">
           <ul class="site-breadcrumb-list">
-            <li class="breadcrumb-item"><button type="button" id="sidebarCollapse" class="btn btn-info navbar-btn site-hidden"><i class="fa fa-align-justify"></i></button>&#x20 <a href="/">Community Training Classes &amp; Labs</a> &gt; <a href="../../index.html">F5 Public Cloud Architectures - F5 in AWS I </a> &gt; 2.1.1. Connecting to the Lab</li>
+            <li class="breadcrumb-item"><button type="button" id="sidebarCollapse" class="btn btn-info navbar-btn site-hidden"><i class="fa fa-align-justify"></i></button>&#x20 <a href="/">Community Training Classes &amp; Labs</a> &gt; <a href="../../index.html">F5 Public Cloud Architectures - F5 in AWS II </a> &gt; 2.1.1. Connecting to the Lab</li>
           </ul>
       </nav>
       
@@ -129,11 +136,11 @@
 <p class="last">Your student account, and short URL path will be announced at the start of the lab.</p>
 </div>
 <ul class="simple">
-<li>Though the environment runs on a shared AWS account, every student will build and work in a dedicated AWS VPC.</li>
-<li>For this lab, a Ravello Windows 10 remote desktop jump host will be provided as a consistent starting point.</li>
+<li>The lab environment consists of both a simulated “on-premises” datacenter hosted in Ravello and a public cloud environment hosted in AWS.</li>
+<li>Though the public cloud environment runs on a shared AWS account, every student will build and work in a dedicated AWS VPC.</li>
+<li>For this lab, a Linux Remote Desktop jump host will be provided as a consistent starting point.</li>
+<li>A convenient way to work through the lab is to split your screen in half: one side for the lab environment, the other side for the lab guide.</li>
 </ul>
-<p>See <a class="reference internal" href="../../intro.html#connecting-to-the-lab-environment"><span class="std std-ref">Connecting to the Lab Environment</span></a> for directions on connecting to the lab environment.</p>
-<p>You may find it easier to follow this lab by opening this document in web browser to ease the process of copy and pasting text.</p>
 </div>
 <div class="section" id="lab-variables">
 <h1>2.1.2. Lab Variables<a class="headerlink" href="#lab-variables" title="Permalink to this headline">¶</a></h1>
@@ -153,39 +160,58 @@
 <td>Unique Key that provides access to this lab (i.e. abc123)</td>
 </tr>
 <tr class="row-odd"><td>emailid</td>
-<td>Account name for each student (i.e. <a class="reference external" href="mailto:user01&#37;&#52;&#48;f5demo&#46;com">user01<span>&#64;</span>f5demo<span>&#46;</span>com</a>)</td>
+<td>Account name for each student (i.e. <a class="reference external" href="mailto:user01&#37;&#52;&#48;f5lab&#46;com">user01<span>&#64;</span>f5lab<span>&#46;</span>com</a>)</td>
 </tr>
 </tbody>
 </table>
 </div>
-<div class="section" id="run-docker">
-<h1>2.1.3. Run Docker<a class="headerlink" href="#run-docker" title="Permalink to this headline">¶</a></h1>
-<p>From your open Putty Window in your Windows jumphost, launch the f5-super-netops docker container.</p>
-<p>Cut and past the command below to accomplish the steps above.</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker run -p <span class="m">8080</span>:80 -p <span class="m">2222</span>:22 -it -e <span class="nv">SNOPS_AUTOCLONE</span><span class="o">=</span><span class="m">0</span> --name dev --restart always tonymarfil/f5-aws-lab:base
+<div class="section" id="launch-remote-desktop-session-to-linux">
+<h1>2.1.3. Launch Remote Desktop Session to Linux<a class="headerlink" href="#launch-remote-desktop-session-to-linux" title="Permalink to this headline">¶</a></h1>
+<a class="reference internal image-reference" href="../../_images/1_ravello_portal1.png"><img alt="../../_images/1_ravello_portal1.png" src="../../_images/1_ravello_portal1.png" style="width: 960.0px; height: 540.0px;" /></a>
+<ul class="simple">
+<li>Look for ubuntu1. Note the username / password. Click on <em>rdp</em> link. Download the rdp file. Click on the rdp file to launch a Remote Desktop Session to your client.</li>
+<li>Alternatively, you can copy and paste the ubutu1 IP address into your Remote Desktop client to modify settings.
+- Local Resources =&gt; Keyboard =&gt; Apply Windows key combinations: On the remote computer. This will allow you to quickly toggle (ALT + TAB) between windows inside the Remote Desktop Session.</li>
+<li>Login with username / password</li>
+</ul>
+<a class="reference internal image-reference" href="../../_images/2_rdp_logon.png"><img alt="../../_images/2_rdp_logon.png" src="../../_images/2_rdp_logon.png" style="width: 960.0px; height: 540.0px;" /></a>
+</div>
+<div class="section" id="ssh-to-the-f5-super-netops-docker-container">
+<h1>2.1.4. SSH to the F5-Super-NetOps docker container<a class="headerlink" href="#ssh-to-the-f5-super-netops-docker-container" title="Permalink to this headline">¶</a></h1>
+<p>From the Linux desktop, click on the upper-left-hand corner “Activities” to reveal the application Dock.</p>
+<p>Click to launch the terminal application.</p>
+<a class="reference internal image-reference" href="../../_images/3_terminal.png"><img alt="../../_images/3_terminal.png" src="../../_images/3_terminal.png" style="width: 960.0px; height: 540.0px;" /></a>
+<p>From the terminal, invoke the ‘snops’ command alias to ssh to the f5-super-netops docker container. Substitute user (su) to root.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>snops
+default
+su -
+default
 </pre></div>
 </div>
-<p>This command will launch  in interactive mode, map port 22 on the container with 2222 on the host, and port 80 on the container with 8080 on the host.</p>
-<p>You should see the resulting screen.</p>
-<a class="reference internal image-reference" href="../../_images/snops-launched.png"><img alt="../../_images/snops-launched.png" src="../../_images/snops-launched.png" style="width: 323.0px; height: 204.0px;" /></a>
+<a class="reference internal image-reference" href="../../_images/4_snops_login.png"><img alt="../../_images/4_snops_login.png" src="../../_images/4_snops_login.png" style="width: 960.0px; height: 540.0px;" /></a>
 </div>
 <div class="section" id="set-variables">
-<h1>2.1.4. Set Variables<a class="headerlink" href="#set-variables" title="Permalink to this headline">¶</a></h1>
-<p>The following will store the lab variables that will be used later in the lab.</p>
-<p>Export your student account and short URL path variables.
-Your student account will be used to create an AWS console login and provide unique names for infrastructure that you create in the shared account. The short URL path will be used to grant access to the shared AWS account both via the AWS API and as the password for the AWS web console. Replace the emailid and shortUrl values below with the student account name and short URL assigned to you at the start of the lab.</p>
-<p>Copy and paste the commands below to accomplish the steps above (replacing the example values with the values provided by your instructor).</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="nb">export</span> <span class="nv">emailid</span><span class="o">=</span>user01@f5demo.com
+<h1>2.1.5. Set Variables<a class="headerlink" href="#set-variables" title="Permalink to this headline">¶</a></h1>
+<p>Export your student account and short URL path variables.</p>
+<p>Your student account will be used to create an AWS console login and provide unique names for infrastructure that you create in the shared AWS account.</p>
+<p>The short URL path will be used to grant access to the shared AWS account both via the AWS API and as the password for the AWS web console. Replace the emailid and shortUrl values below with the student account name and short URL assigned to you at the start of the lab.</p>
+<p>Copy and paste the commands below to accomplish the steps above.</p>
+<div class="admonition attention">
+<p class="first admonition-title">Attention</p>
+<p class="last"><strong>REPLACE THE EXAMPLE VALUES WITH THE VALUES PROVIDED TO YOU BY YOUR INSTRUCTOR.</strong></p>
+</div>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">export</span> <span class="nv">emailid</span><span class="o">=</span>user99@f5lab.com
 <span class="nb">export</span> <span class="nv">shortUrl</span><span class="o">=</span>abc123
 printenv
 </pre></div>
 </div>
+<a class="reference internal image-reference" href="../../_images/4a_export.png"><img alt="../../_images/4a_export.png" src="../../_images/4a_export.png" style="width: 960.0px; height: 540.0px;" /></a>
 <p>The <code class="docutils literal notranslate"><span class="pre">printenv</span></code> command will echo all your environment variables.  Look for emailid and shortUrl. Confirm the exported variables are correct.</p>
 </div>
 <div class="section" id="initialize-your-lab-environment">
-<h1>2.1.5. Initialize your Lab Environment<a class="headerlink" href="#initialize-your-lab-environment" title="Permalink to this headline">¶</a></h1>
-<p>This will create an AWS credential that you will use to access the shared AWS account.</p>
-<p>You will (instructions provided below)</p>
+<h1>2.1.6. Initialize your Lab Environment<a class="headerlink" href="#initialize-your-lab-environment" title="Permalink to this headline">¶</a></h1>
+<p>This will create AWS credentials that you will use to access the shared AWS account.</p>
+<p>You will:</p>
 <ul class="simple">
 <li>Change to your home directory.</li>
 <li>Clone the git repository for this lab.</li>
@@ -194,62 +220,56 @@ printenv
 </ul>
 <p>Copy and paste the commands below to accomplish the steps above.</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span> ~
-git clone https://github.com/TonyMarfil/marfil-f5-terraform
+git clone -b dev2 https://github.com/TonyMarfil/marfil-f5-terraform
 <span class="nb">cd</span> ~/marfil-f5-terraform/
 <span class="nb">source</span> start
 </pre></div>
 </div>
+<a class="reference internal image-reference" href="../../_images/5_git_clone.png"><img alt="../../_images/5_git_clone.png" src="../../_images/5_git_clone.png" style="width: 960.0px; height: 540.0px;" /></a>
+<p>Git clone completes successfully.</p>
+<a class="reference internal image-reference" href="../../_images/6_git_clone_complete.png"><img alt="../../_images/6_git_clone_complete.png" src="../../_images/6_git_clone_complete.png" style="width: 960.0px; height: 540.0px;" /></a>
 <div class="admonition attention">
 <p class="first admonition-title">Attention</p>
 <p class="last">For a smooth ride, always invoke commands from inside the cloned git repository (marfil-f5-terraform). To check you’re in the right place you can run the command <code class="docutils literal notranslate"><span class="pre">pwd</span></code> and the output should read <code class="docutils literal notranslate"><span class="pre">/root/marfil-f5-terraform</span></code></p>
 </div>
 </div>
 <div class="section" id="launch-terraform">
-<h1>2.1.6. Launch Terraform<a class="headerlink" href="#launch-terraform" title="Permalink to this headline">¶</a></h1>
-<p>Now that we have created credentials to access the AWS account we will use Terraform to deploy our lab environment.</p>
-<p>Invoke terraform.</p>
+<h1>2.1.7. Launch Terraform<a class="headerlink" href="#launch-terraform" title="Permalink to this headline">¶</a></h1>
+<p>Now that we have created credentials to access the AWS account, we will use Terraform to deploy our lab environment.</p>
+<p>Initialize terraform.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>terraform init
+</pre></div>
+</div>
+<p>Invoke terraform plan. This will output the changes that terraform will apply.</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>terraform plan
 </pre></div>
 </div>
-<p>This will output the changes that terraform will apply.  Now run.</p>
+<p>Terraform apply.</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>terraform apply
 </pre></div>
 </div>
-<p>Once “terraform apply” completes, you can test your web server instances and ELB are up:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>curl -I <span class="sb">`</span>terraform output elb_dns_name<span class="sb">`</span>
-</pre></div>
+<a class="reference internal image-reference" href="../../_images/7_terraform_apply.png"><img alt="../../_images/7_terraform_apply.png" src="../../_images/7_terraform_apply.png" style="width: 960.0px; height: 540.0px;" /></a>
+<a class="reference internal image-reference" href="../../_images/8_terraform_apply_complete.png"><img alt="../../_images/8_terraform_apply_complete.png" src="../../_images/8_terraform_apply_complete.png" style="width: 960.0px; height: 540.0px;" /></a>
 </div>
-<p>You should see a reply with status code “HTTP/1.1 200 OK”. Hit &lt;ctrl&gt;+C to stop.</p>
-<p>When ‘terraform apply’ completes, note the **aws_alias** and vpc-id values. Open up your **aws_alias** link in a browser and login to the AWS console with the email address and password you created during the install. You can always get these values by invoking terraform output with the variable name:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>terraform output **aws_alias**
-terraform output vpc-id
-</pre></div>
+<div class="section" id="f5-aws-lab-test-application">
+<h1>2.1.8. F5 AWS Lab Test application<a class="headerlink" href="#f5-aws-lab-test-application" title="Permalink to this headline">¶</a></h1>
+<p>Note the alb_dns_name value in terraform output. HTTPS to this site from any browser to see the example lab application.</p>
+<a class="reference internal image-reference" href="../../_images/9_alb_demo_site.png"><img alt="../../_images/9_alb_demo_site.png" src="../../_images/9_alb_demo_site.png" style="width: 960.0px; height: 540.0px;" /></a>
 </div>
-<div class="admonition warning">
-<p class="first admonition-title">Warning</p>
-<p class="last">terraform apply will take five minutes to complete, but the environment will not be ready for another 15 minutes as the Big-IP virtual editions and supporting infrastructure wake up. In the meantime, we can begin to explore the AWS lab environment.</p>
-</div>
-</div>
-<div class="section" id="what-just-happened-that-was-a-lot-of-random-text-scrolling-in-my-docker-console">
-<h1>2.1.7. What just happened? That was a lot of random text scrolling in my Docker console!<a class="headerlink" href="#what-just-happened-that-was-a-lot-of-random-text-scrolling-in-my-docker-console" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="what-just-happened">
+<h1>2.1.9. What just happened?<a class="headerlink" href="#what-just-happened" title="Permalink to this headline">¶</a></h1>
 <p>This is the TL;DR version of the steps completed.</p>
-<p>When you clone the git repository, you are pulling down a fresh copy of the all of the files you need to get started. These files are hosted on Github, the most popular online revision control repository, and include:</p>
-<ul>
-<li><p class="first">Onboarding scripts that create your AWS account and other prerequisites: <em>f5-super-netops-install.sh</em>, <em>addUser.sh</em>, <em>export.sh</em>.</p>
+<p>When you clone the git repository, you are pulling down a current version of the files you need to get started. These files are hosted on Github, the most popular online revision control repository, and include:</p>
+<ul class="simple">
+<li>Onboarding scripts that create your AWS account and other prerequisites: <em>f5-super-netops-install.sh</em>, <em>addUser.sh</em>, <em>export.sh</em>.<ul>
+<li>all of the terraform configuration files–a declarative, comprehensive representation of our entire application stack:</li>
+<li><em>main.tf</em> - Every terraform configuration has a main.tf. This contains all of the AWS specific (non-F5) environment configuration, including web instances</li>
+<li><em>f5-cloudformation</em>.tf files - A terraform file that takes the officially supported CloudFormation template hosted at: <a class="reference external" href="https://s3.amazonaws.com/f5-cft/f5-existing-stack-bigiq-1nic-bigip.templat">https://s3.amazonaws.com/f5-cft/f5-existing-stack-bigiq-1nic-bigip.templat</a> and stuffs all of the prerequisite parameters so we don’t have to do it manually.</li>
+<li><em>outputs.tf</em> - Any variable in the outputs.tf file can be rendered to the console with ‘terraform output’ and is exposed to other command line tools.</li>
+<li><em>vars.tf</em> - Variables for terraform.</li>
+</ul>
 </li>
-<li><p class="first">all of the terraform configuration files–a declarative, comprehensive representation of our entire application stack:</p>
-<blockquote>
-<div><p><em>main.tf</em> - Every terraform configuration has a main.tf. This contains all of the AWS specific (non-F5) environment configuration, including web instances</p>
-<p><em>f5-cloudformation-autoscale-waf.tf</em> and <em>f5-cloudformation-cross-az-ha-hourly.tf</em> - Nothing more than a terraform file that takes the officially supported CloudFormation template hosted at:</p>
-<p><a class="reference external" href="https://s3.amazonaws.com/f5-cft/f5-autoscale-bigip.template">https://s3.amazonaws.com/f5-cft/f5-autoscale-bigip.template</a></p>
-<p><a class="reference external" href="https://s3.amazonaws.com/f5-cft/f5-existing-stack-across-az-cluster-hourly-2nic-bigip.template">https://s3.amazonaws.com/f5-cft/f5-existing-stack-across-az-cluster-hourly-2nic-bigip.template</a></p>
-<p>…and stuffs all of the prerequisite parameters so we don’t have to do it manually.</p>
-<p><em>outputs.tf</em> - Any variable in the outputs.tf file can be rendered to the console with ‘terraform output’ and is exposed to other command line tools.</p>
-<p><em>vars.tf</em> - Variables for terraform.</p>
-</div></blockquote>
-</li>
-<li><p class="first">Handy utilities to help move the lab along with minimum fuss: <em>lab-info</em>, <em>password-reset</em>, <em>lab-cleanup</em>.</p>
-</li>
+<li>Handy utilities to help move the lab along with minimum fuss: <em>password-reset</em>.</li>
 </ul>
 <p>The start script takes care of all of the prerequisites to standing up an AWS environment. Precisely:</p>
 <ul class="simple">
@@ -260,10 +280,6 @@ terraform output vpc-id
 <li>Sets the default region: us-east-1 (Virginia), ap-southeast-1 (Singapore), etc.</li>
 </ul>
 <p>The terraform files go into effect when you invoke ‘terraform apply’. This step makes use of all of the prerequisites from the step before to build the environment in AWS.</p>
-</div>
-<div class="section" id="video-example">
-<h1>2.1.8. Video example<a class="headerlink" href="#video-example" title="Permalink to this headline">¶</a></h1>
-<p>This <a class="reference external" href="https://asciinema.org/a/Tj8vreWGmvXBT7dGhqv36RFMg">video</a> walks through all of the steps in this part of the lab. The emailid and shortUrl values used are only examples and no longer valid. You can pause, cut, and paste from the example, but always remember to replace the example values with the values assigned to you by the lab instructor.</p>
 </div>
 
 

@@ -5,10 +5,10 @@
 # ------------
 #
 # REQUIRED: Your class/lab name
-classname = "F5 Public Cloud Architectures - F5 in AWS I"
+classname = "F5 Public Cloud Architectures - F5 in AWS II"
 
 # OPTIONAL: The URL to the GitHub Repository for this class
-github_repo = "https://github.com/TonyMarfil/f5-agility-labs-f5-in-aws-1"
+github_repo = "https://github.com/TonyMarfil/f5-agility-labs-f5-in-aws-2"
 
 # OPTIONAL: Google Analytics
 # googleanalytics_id = 'UA-85156643-4'

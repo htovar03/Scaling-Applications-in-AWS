@@ -5,7 +5,7 @@
   <script src="https://assets.adobedtm.com/50164577268f481934e5d57dbfb78f929164cd0d/satelliteLib-ea775cfabef5fca8b04e9392f20c986c0724a7c3-staging.js"></script>
   <!--Production:-->
   <script src="https://assets.adobedtm.com/50164577268f481934e5d57dbfb78f929164cd0d/satelliteLib-ea775cfabef5fca8b04e9392f20c986c0724a7c3.js"></script>
-    <title>2.4.1. Troubleshooting Guide</title>
+    <title>2.4.1. Create a Virtual Server on Big-IP VE the Old Fashioned Way</title>
   
 
   <meta charset="utf-8">
@@ -14,8 +14,8 @@
   <!-- F5 metadata -->
   <meta name="kb_doc_type" content="Manual"/>
   <meta name="kb_doc_type" content="User Guide"/>
-  <meta name="title" content="2.4.1. Troubleshooting Guide"/>
-  <meta name="product" content="F5 Public Cloud Architectures - F5 in AWS I"/>
+  <meta name="title" content="2.4.1. Create a Virtual Server on Big-IP VE the Old Fashioned Way"/>
+  <meta name="product" content="F5 Public Cloud Architectures - F5 in AWS II"/>
   <meta name="version" content=""/>
   <meta name="updated_date"  content="None"/>
   <meta name="archived" content="Archived documents excluded"/>
@@ -36,7 +36,7 @@
   <head>
     <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>2.4.1. Troubleshooting Guide &#8212; F5 Public Cloud Architectures - F5 in AWS I  documentation</title>
+    <title>2.4.1. Create a Virtual Server on Big-IP VE the Old Fashioned Way &#8212; F5 Public Cloud Architectures - F5 in AWS II  documentation</title>
     <link rel="stylesheet" href="../../_static/css/bootstrap.min.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/css/f5_agility_theme.css" type="text/css" />
@@ -51,8 +51,8 @@
     <script type="text/javascript" src="../../_static/doctools.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="2.5. Run the lab on your own" href="../module5/module5.html" />
-    <link rel="prev" title="2.4. Troubleshooting Guide" href="module4.html" />
+    <link rel="next" title="2.5. Declarative Virtual Server with Application Services Extension 3" href="../module5/module5.html" />
+    <link rel="prev" title="2.4. Create a Virtual Server to Protect your Web Applications" href="module4.html" />
   </head><body>
   <div id="clouddocs-header"></div>
 
@@ -61,7 +61,7 @@
     </div>
     <div id="sidebar" class="section-nav">
       <nav class="nav-sidebartoc">
-        <h5>F5 Public Cloud Architectures - F5 in AWS I  documentation </h5>
+        <h5>F5 Public Cloud Architectures - F5 in AWS II  documentation </h5>
 <div id="searchbox" role="search">
   <form class="search" action="../../search.html" method="get">
     <input type="text" class="search" name="q" placeholder=" Search..." />
@@ -75,17 +75,7 @@
         <h5>Current Page</h5>
         <span class="nav-sidebartoc">
             <ul>
-<li><a class="reference internal" href="#">2.4.1. Troubleshooting Guide</a><ul>
-<li><a class="reference internal" href="#terraform-apply-fails">2.4.1.1. terraform apply fails</a></li>
-<li><a class="reference internal" href="#emailid-format">2.4.1.2. emailid format</a></li>
-<li><a class="reference internal" href="#wrong-shorturl">2.4.1.3. Wrong shortUrl</a></li>
-<li><a class="reference internal" href="#i-don-t-see-any-instances-in-aws-console">2.4.1.4. I don’t see any instances in AWS console</a></li>
-<li><a class="reference internal" href="#accidently-exit-and-stop-the-super-netops-container">2.4.1.5. Accidently exit and stop the super-netops container</a></li>
-<li><a class="reference internal" href="#autoscale-waf-not-triggering">2.4.1.6. 2.3.5 Autoscale WAF not triggering</a></li>
-<li><a class="reference internal" href="#test-lab-and-confirm-aws-limits-beforehand">2.4.1.7. Test lab and confirm AWS limits beforehand</a></li>
-<li><a class="reference internal" href="#misc">2.4.1.8. Misc.</a></li>
-</ul>
-</li>
+<li><a class="reference internal" href="#">2.4.1. Create a Virtual Server on Big-IP VE the Old Fashioned Way</a></li>
 </ul>
 
          </span>
@@ -95,12 +85,18 @@
             <p class="caption"><span class="caption-text">Contents:</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../../intro.html">1. Getting Started</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="../class1.html">2. Class - F5 Public Cloud Architectures - F5 in AWS I</a><ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../class1.html">2. Class - F5 Public Cloud Architectures - F5 in AWS II</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="../module1/module1.html">2.1. Infrastructure As Code</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../module2/module2.html">2.2. Exploring AWS</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../module3/module3.html">2.3. Extending and Securing your Cloud</a></li>
-<li class="toctree-l2 current"><a class="reference internal" href="module4.html">2.4. Troubleshooting Guide</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../module5/module5.html">2.5. Run the lab on your own</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../module3/module3.html">2.3. F5 Networks AWS WAF Rules</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="module4.html">2.4. Create a Virtual Server to Protect your Web Applications</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../module5/module5.html">2.5. Declarative Virtual Server with Application Services Extension 3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../module6/module6.html">2.6. F5 Networks IPSec VPN to AWS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../module7/module7.html">2.7. Big-IQ 6.0 and Application Templates for AWS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../module8/module8.html">2.8. Big-IP Cloud Edition:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../module9/module9.html">2.9. Create a Service Scaling Group Application:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../module_10/module_10.html">2.10. Test Autoscaling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../module_11/module_11.html">2.11. Clean up environment</a></li>
 </ul>
 </li>
 </ul>
@@ -118,84 +114,123 @@
     <article class="docs-container site-article-inner">
             <nav class="site-breadcrumb-nav site-nav">
           <ul class="site-breadcrumb-list">
-            <li class="breadcrumb-item"><button type="button" id="sidebarCollapse" class="btn btn-info navbar-btn site-hidden"><i class="fa fa-align-justify"></i></button>&#x20 <a href="/">Community Training Classes &amp; Labs</a> &gt; <a href="../../index.html">F5 Public Cloud Architectures - F5 in AWS I </a> &gt; 2.4.1. Troubleshooting Guide</li>
+            <li class="breadcrumb-item"><button type="button" id="sidebarCollapse" class="btn btn-info navbar-btn site-hidden"><i class="fa fa-align-justify"></i></button>&#x20 <a href="/">Community Training Classes &amp; Labs</a> &gt; <a href="../../index.html">F5 Public Cloud Architectures - F5 in AWS II </a> &gt; 2.4.1. Create a Virtual Server on Big-IP VE the Old Fashioned Way</li>
           </ul>
       </nav>
       
       
 
     
-  <div class="section" id="troubleshooting-guide">
-<h1>2.4.1. Troubleshooting Guide<a class="headerlink" href="#troubleshooting-guide" title="Permalink to this headline">¶</a></h1>
-<p>To help all students get past the first part of the lab, Walk through 2.1.1 - 2.1.6 in front of the class for all to see. Then leave your shared screen up on the monitor like this:</p>
-<a class="reference internal image-reference" href="../../_images/side-by-side.png"><img alt="../../_images/side-by-side.png" src="../../_images/side-by-side.png" style="width: 859.75px; height: 350.5px;" /></a>
-<div class="section" id="terraform-apply-fails">
-<h2>2.4.1.1. terraform apply fails<a class="headerlink" href="#terraform-apply-fails" title="Permalink to this headline">¶</a></h2>
-<p>If a student’s ‘terraform apply’ operation fails, the best thing to do is to shutdown the docker container, assign a new student number, and start all over. This is always a sign that we’ve reached the AWS API limits because of too many simultaneous labs coming on line at once and AWS is throttling: <a class="reference external" href="https://forums.aws.amazon.com/thread.jspa?messageID=720883">https://forums.aws.amazon.com/thread.jspa?messageID=720883</a></p>
-<p>For example, if tragically, <a class="reference external" href="mailto:user20&#37;&#52;&#48;f5demo&#46;com">user20<span>&#64;</span>f5demo<span>&#46;</span>com</a> failed to complete ‘terraform apply’</p>
-<p>CTRL+p+q to exit the container, then stop and remove the container and start fresh as <a class="reference external" href="mailto:user120&#37;&#52;&#48;f5demo&#46;com">user120<span>&#64;</span>f5demo<span>&#46;</span>com</a></p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker stop <span class="k">$(</span>docker ps -lq<span class="k">)</span>
-docker rm <span class="k">$(</span>docker ps -lq<span class="k">)</span>
-
-docker run -p <span class="m">8080</span>:80 -p <span class="m">2222</span>:22 -it -e <span class="nv">SNOPS_AUTOCLONE</span><span class="o">=</span><span class="m">0</span> f5devcentral/f5-super-netops-container:base
-
-<span class="nb">export</span> <span class="nv">emailid</span><span class="o">=</span>user120@f5demo.com
-...
+  <div class="section" id="create-a-virtual-server-on-big-ip-ve-the-old-fashioned-way">
+<h1>2.4.1. Create a Virtual Server on Big-IP VE the Old Fashioned Way<a class="headerlink" href="#create-a-virtual-server-on-big-ip-ve-the-old-fashioned-way" title="Permalink to this headline">¶</a></h1>
+<ol class="arabic simple">
+<li>From the Linux terminal tab with the ssh session open to the Super-NetOps docker container:</li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>terraform output
 </pre></div>
 </div>
-<p>…continue with Task 2.1.4 from here.</p>
-</div>
-<div class="section" id="emailid-format">
-<h2>2.4.1.2. emailid format<a class="headerlink" href="#emailid-format" title="Permalink to this headline">¶</a></h2>
-<p>If the student accidentally deviates from the emailid format it’s no big deal, as long as it’s unique and a standard email format &lt;<a class="reference external" href="mailto:name&#37;&#52;&#48;domain&#46;suffix">name<span>&#64;</span>domain<span>&#46;</span>suffix</a>&gt; there will be no problem. If the student forgets the emailid you can always verify from the working directory:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>basename <span class="sb">`</span>ls *.emailid<span class="sb">`</span> .emailid
+<p>…Note both the Bigip1subnet1Az1SelfEipAddress and BigipUrl values.</p>
+<ol class="arabic simple" start="2">
+<li>Big-IP Virtual Edition appliances deployed to public cloud are only accessible initially only via ssh key. You have to create an admin account and password before you can configure this Big-IP from the Configuration utility (Web UI). Run the password-reset script to create an admin account. Replace x.x.x.x with the terraform output value of Bigip1subnet1Az1SelfEipAddress.</li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>password-reset x.x.x.x
 </pre></div>
 </div>
+<a class="reference internal image-reference" href="../../_images/1_reset_password.png"><img alt="../../_images/1_reset_password.png" src="../../_images/1_reset_password.png" style="width: 960.0px; height: 540.0px;" /></a>
+<ol class="arabic simple" start="3">
+<li>Note the BigipURL value. Copy and paste into a web browser. Be mindful of HTTPS: port 8443 for management!</li>
+</ol>
+<div class="admonition attention">
+<p class="first admonition-title">Attention</p>
+<p class="last">This lab makes use of insecure self-signed certificates. Bypass the warnings by clicking on “Confirm Security Exception”.</p>
 </div>
-<div class="section" id="wrong-shorturl">
-<h2>2.4.1.3. Wrong shortUrl<a class="headerlink" href="#wrong-shorturl" title="Permalink to this headline">¶</a></h2>
-<p>If the student enters the wrong shortUrl, the start script will install all of the prerequisite software but eventually abort with error message: “Invalid shortUrl.  Aborting.” In this case you need only export shortUrl= with the right value and re-run the start script. For example if the valid shortUrl=seattle-dumplings.</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">export</span> <span class="nv">shortUrl</span><span class="o">=</span>seattle-dumplings
-<span class="nb">source</span> ./start
+<a class="reference internal image-reference" href="../../_images/2_TLS_warning.png"><img alt="../../_images/2_TLS_warning.png" src="../../_images/2_TLS_warning.png" style="width: 960.0px; height: 540.0px;" /></a>
+<ol class="arabic simple" start="4">
+<li>Login to you F5 Big-IP VE running in AWS. Username: admin and Password: the value of shortUrl for your class.</li>
+</ol>
+<a class="reference internal image-reference" href="../../_images/3_waf_config_login_8443.png"><img alt="../../_images/3_waf_config_login_8443.png" src="../../_images/3_waf_config_login_8443.png" style="width: 960.0px; height: 540.0px;" /></a>
+<ol class="arabic simple" start="5">
+<li>From the Linux terminal tab with the ssh session open to the Super-NetOps docker container:</li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>terraform output
 </pre></div>
 </div>
-</div>
-<div class="section" id="i-don-t-see-any-instances-in-aws-console">
-<h2>2.4.1.4. I don’t see any instances in AWS console<a class="headerlink" href="#i-don-t-see-any-instances-in-aws-console" title="Permalink to this headline">¶</a></h2>
-<p>Student is in the wrong region. If this happens more than once (this gotcha is in the documentation) you can take the opportunity to explain to the class: regions vs. availability zones.</p>
-</div>
-<div class="section" id="accidently-exit-and-stop-the-super-netops-container">
-<h2>2.4.1.5. Accidently exit and stop the super-netops container<a class="headerlink" href="#accidently-exit-and-stop-the-super-netops-container" title="Permalink to this headline">¶</a></h2>
-<p>If the student accidentally exits and as a result stops the super-netops docker container, they will have to restart and attach to the super-netops container. From the Linux host:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker start <span class="k">$(</span>docker ps -lq<span class="k">)</span>
-docker attach <span class="k">$(</span>docker ps -lq<span class="k">)</span>
-<span class="nb">source</span> ~/.profile
+<p>…Note the Bigip1ExternalInterfacePrivateIp value and both web-server-# values. Bigip1ExternalInterfacePrivateIp will be the IP address of your virtual server on the Big-IP VE and the web-server-#’s will be the pool members.</p>
+<a class="reference internal image-reference" href="../../_images/4_terraform_output_for_virtual_server_values.png"><img alt="../../_images/4_terraform_output_for_virtual_server_values.png" src="../../_images/4_terraform_output_for_virtual_server_values.png" style="width: 960.0px; height: 540.0px;" /></a>
+<ol class="arabic simple" start="6">
+<li>From the Big-IP Configuration utilitty (Web UI), navigate to Local Traffic =&gt; Virtual Servers =&gt; Create new virtual server.</li>
+</ol>
+<table border="1" class="docutils">
+<colgroup>
+<col width="39%" />
+<col width="61%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Parameter</th>
+<th class="head">value</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Name</td>
+<td>app1</td>
+</tr>
+<tr class="row-odd"><td>Destination Address/Mask</td>
+<td>terraform output value of Bigip1ExternalInterfacePrivateIp</td>
+</tr>
+<tr class="row-even"><td>Service Port</td>
+<td>443 / HTTPS</td>
+</tr>
+<tr class="row-odd"><td>HTTP Profile</td>
+<td>http</td>
+</tr>
+<tr class="row-even"><td>SSL Profile (Client)</td>
+<td>clientssl-secure</td>
+</tr>
+<tr class="row-odd"><td>Default Pool</td>
+<td>+ to create pool1</td>
+</tr>
+</tbody>
+</table>
+<a class="reference internal image-reference" href="../../_images/5_virtual_server_part1.png"><img alt="../../_images/5_virtual_server_part1.png" src="../../_images/5_virtual_server_part1.png" style="width: 960.0px; height: 540.0px;" /></a>
+<a class="reference internal image-reference" href="../../_images/6_virtual_server_part2.png"><img alt="../../_images/6_virtual_server_part2.png" src="../../_images/6_virtual_server_part2.png" style="width: 960.0px; height: 540.0px;" /></a>
+<table border="1" class="docutils">
+<colgroup>
+<col width="39%" />
+<col width="61%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Parameter</th>
+<th class="head">value</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Name</td>
+<td>pool1</td>
+</tr>
+<tr class="row-odd"><td>Health Monitors</td>
+<td>http</td>
+</tr>
+<tr class="row-even"><td>New Members</td>
+<td>terraform output values of web-server-0 and web-server-1</td>
+</tr>
+<tr class="row-odd"><td>Service Port</td>
+<td>80 / HTTP</td>
+</tr>
+</tbody>
+</table>
+<p>Click Finished to complete the creation of Pool pool1.</p>
+<a class="reference internal image-reference" href="../../_images/7_pool.png"><img alt="../../_images/7_pool.png" src="../../_images/7_pool.png" style="width: 960.0px; height: 540.0px;" /></a>
+<p>Click Finished to complete the creation of Virtual Server app1.</p>
+<a class="reference internal image-reference" href="../../_images/8_finished.png"><img alt="../../_images/8_finished.png" src="../../_images/8_finished.png" style="width: 960.0px; height: 540.0px;" /></a>
+<ol class="arabic simple" start="7">
+<li>From the Linux terminal tab with the ssh session open to the Super-NetOps docker container:</li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>terraform output
 </pre></div>
 </div>
-<p>…or alternatively you can start the super-netops container, but instead of attaching to the container console, you can ssh to the container. This makes it impossible to accidentally stop the container.</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker start <span class="k">$(</span>docker ps -lq<span class="k">)</span>
-ssh -p <span class="m">2222</span> snops@localhost
-default
-su -
-default
-</pre></div>
-</div>
-</div>
-<div class="section" id="autoscale-waf-not-triggering">
-<h2>2.4.1.6. 2.3.5 Autoscale WAF not triggering<a class="headerlink" href="#autoscale-waf-not-triggering" title="Permalink to this headline">¶</a></h2>
-<p>This is difficult to calibrate. You can have fun and ensure success by asking multiple students to use the apache-bench tool (ab) to gang up on a single WAF instance instead of each student trying to trigger auto-scale in their own environment. You can then show the auto scale event on your shared screen.</p>
-</div>
-<div class="section" id="test-lab-and-confirm-aws-limits-beforehand">
-<h2>2.4.1.7. Test lab and confirm AWS limits beforehand<a class="headerlink" href="#test-lab-and-confirm-aws-limits-beforehand" title="Permalink to this headline">¶</a></h2>
-<p><a class="reference external" href="https://github.com/TonyMarfil/aws-lab-tools">https://github.com/TonyMarfil/aws-lab-tools</a></p>
-</div>
-<div class="section" id="misc">
-<h2>2.4.1.8. Misc.<a class="headerlink" href="#misc" title="Permalink to this headline">¶</a></h2>
-<ul class="simple">
-<li>Login to existing bucket and cleanup.</li>
-<li>BigIP not coming up licensed.</li>
-</ul>
-</div>
+<p>…Note the BigipUrl value. Change the port from 8443 to 443 and open in a web browser. Your Big-IP is protecting traffic to/from our sample application.</p>
+<a class="reference internal image-reference" href="../../_images/9_https_to_app1.png"><img alt="../../_images/9_https_to_app1.png" src="../../_images/9_https_to_app1.png" style="width: 960.0px; height: 540.0px;" /></a>
+<p>Single NIC / Single-IP deployments work well in public cloud topologies. In this lab, we connected to the Big-IP over a single IP address to 1. ssh and create an admin account, 2. https over port 8443 for config management and 3. https 443 to process traffic.</p>
 </div>
 
 
@@ -204,10 +239,10 @@ default
      <div class="row next-prev-btn-row">
        <div class="col-lg-12">
        
-        <a href="module4.html" title="2.4. Troubleshooting Guide" accesskey="p" class="btn btn-primary pull-left"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i> Previous</a>
+        <a href="module4.html" title="2.4. Create a Virtual Server to Protect your Web Applications" accesskey="p" class="btn btn-primary pull-left"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i> Previous</a>
        
        
-          <a href="../module5/module5.html" title="2.5. Run the lab on your own" accesskey="n" class="btn btn-primary pull-right">Next <i class="fa fa-arrow-circle-right" aria-hidden="true"></i></a>
+          <a href="../module5/module5.html" title="2.5. Declarative Virtual Server with Application Services Extension 3" accesskey="n" class="btn btn-primary pull-right">Next <i class="fa fa-arrow-circle-right" aria-hidden="true"></i></a>
        
      </div>
      </div>

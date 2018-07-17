@@ -1,7 +1,7 @@
-Run the lab on your own
-=======================
+Declarative Virtual Server with Application Services Extension 3
+================================================================
 
-You can run this lab on your own, on any AWS account, but you will need to create your own admin account and tweak the startup steps slightly.
+Create a virtual server the newfangled way.
 
 .. toctree::
    :maxdepth: 1
