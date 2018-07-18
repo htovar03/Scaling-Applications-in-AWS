@@ -15,7 +15,7 @@
   <meta name="kb_doc_type" content="Manual"/>
   <meta name="kb_doc_type" content="User Guide"/>
   <meta name="title" content="2.1.1. Connecting to the Lab"/>
-  <meta name="product" content="F5 Public Cloud Architectures - F5 in AWS II"/>
+  <meta name="product" content="Public Cloud Architectures I: Deploying F5 BIG-IP Virtual Edition in AWS"/>
   <meta name="version" content=""/>
   <meta name="updated_date"  content="None"/>
   <meta name="archived" content="Archived documents excluded"/>
@@ -36,7 +36,7 @@
   <head>
     <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>2.1.1. Connecting to the Lab &#8212; F5 Public Cloud Architectures - F5 in AWS II  documentation</title>
+    <title>2.1.1. Connecting to the Lab &#8212; Public Cloud Architectures I: Deploying F5 BIG-IP Virtual Edition in AWS  documentation</title>
     <link rel="stylesheet" href="../../_static/css/bootstrap.min.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/css/f5_agility_theme.css" type="text/css" />
@@ -61,7 +61,7 @@
     </div>
     <div id="sidebar" class="section-nav">
       <nav class="nav-sidebartoc">
-        <h5>F5 Public Cloud Architectures - F5 in AWS II  documentation </h5>
+        <h5>Public Cloud Architectures I: Deploying F5 BIG-IP Virtual Edition in AWS  documentation </h5>
 <div id="searchbox" role="search">
   <form class="search" action="../../search.html" method="get">
     <input type="text" class="search" name="q" placeholder=" Search..." />
@@ -93,7 +93,7 @@
             <p class="caption"><span class="caption-text">Contents:</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../../intro.html">1. Getting Started</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="../class1.html">2. Class - F5 Public Cloud Architectures - F5 in AWS II</a><ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../class1.html">2. Class - Public Cloud Architectures I: Deploying F5 BIG-IP Virtual Edition in AWS</a><ul class="current">
 <li class="toctree-l2 current"><a class="reference internal" href="module1.html">2.1. Infrastructure As Code</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../module2/module2.html">2.2. Exploring AWS</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../module3/module3.html">2.3. F5 Networks AWS WAF Rules</a></li>
@@ -122,7 +122,7 @@
     <article class="docs-container site-article-inner">
             <nav class="site-breadcrumb-nav site-nav">
           <ul class="site-breadcrumb-list">
-            <li class="breadcrumb-item"><button type="button" id="sidebarCollapse" class="btn btn-info navbar-btn site-hidden"><i class="fa fa-align-justify"></i></button>&#x20 <a href="/">Community Training Classes &amp; Labs</a> &gt; <a href="../../index.html">F5 Public Cloud Architectures - F5 in AWS II </a> &gt; 2.1.1. Connecting to the Lab</li>
+            <li class="breadcrumb-item"><button type="button" id="sidebarCollapse" class="btn btn-info navbar-btn site-hidden"><i class="fa fa-align-justify"></i></button>&#x20 <a href="/">Community Training Classes &amp; Labs</a> &gt; <a href="../../index.html">Public Cloud Architectures I: Deploying F5 BIG-IP Virtual Edition in AWS </a> &gt; 2.1.1. Connecting to the Lab</li>
           </ul>
       </nav>
       
@@ -136,9 +136,8 @@
 <p class="last">Your student account, and short URL path will be announced at the start of the lab.</p>
 </div>
 <ul class="simple">
-<li>The lab environment consists of both a simulated “on-premises” datacenter hosted in Ravello and a public cloud environment hosted in AWS.</li>
-<li>Though the public cloud environment runs on a shared AWS account, every student will build and work in a dedicated AWS VPC.</li>
 <li>For this lab, a Linux Remote Desktop jump host will be provided as a consistent starting point.</li>
+<li>Though the public cloud environment runs on a shared AWS account, every student will build and work in a dedicated AWS VPC.</li>
 <li>A convenient way to work through the lab is to split your screen in half: one side for the lab environment, the other side for the lab guide.</li>
 </ul>
 </div>
@@ -200,7 +199,7 @@ default
 <p class="first admonition-title">Attention</p>
 <p class="last"><strong>REPLACE THE EXAMPLE VALUES WITH THE VALUES PROVIDED TO YOU BY YOUR INSTRUCTOR.</strong></p>
 </div>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">export</span> <span class="nv">emailid</span><span class="o">=</span>user99@f5lab.com
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">export</span> <span class="nv">emailid</span><span class="o">=</span>user55@f5lab.com
 <span class="nb">export</span> <span class="nv">shortUrl</span><span class="o">=</span>abc123
 printenv
 </pre></div>
@@ -220,7 +219,7 @@ printenv
 </ul>
 <p>Copy and paste the commands below to accomplish the steps above.</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span> ~
-git clone -b dev2 https://github.com/TonyMarfil/marfil-f5-terraform
+git clone -b dev https://github.com/TonyMarfil/marfil-f5-terraform
 <span class="nb">cd</span> ~/marfil-f5-terraform/
 <span class="nb">source</span> start
 </pre></div>
@@ -253,8 +252,8 @@ git clone -b dev2 https://github.com/TonyMarfil/marfil-f5-terraform
 </div>
 <div class="section" id="f5-aws-lab-test-application">
 <h1>2.1.8. F5 AWS Lab Test application<a class="headerlink" href="#f5-aws-lab-test-application" title="Permalink to this headline">¶</a></h1>
-<p>Note the alb_dns_name value in terraform output. HTTPS to this site from any browser to see the example lab application.</p>
-<a class="reference internal image-reference" href="../../_images/9_alb_demo_site.png"><img alt="../../_images/9_alb_demo_site.png" src="../../_images/9_alb_demo_site.png" style="width: 960.0px; height: 540.0px;" /></a>
+<p>Note the elb_dns_name value in terraform output. HTTP to this site from any browser to see the example lab application.</p>
+<a class="reference internal image-reference" href="../../_images/9_http_elb_site.png"><img alt="../../_images/9_http_elb_site.png" src="../../_images/9_http_elb_site.png" style="width: 960.0px; height: 540.0px;" /></a>
 </div>
 <div class="section" id="what-just-happened">
 <h1>2.1.9. What just happened?<a class="headerlink" href="#what-just-happened" title="Permalink to this headline">¶</a></h1>
@@ -264,7 +263,7 @@ git clone -b dev2 https://github.com/TonyMarfil/marfil-f5-terraform
 <li>Onboarding scripts that create your AWS account and other prerequisites: <em>f5-super-netops-install.sh</em>, <em>addUser.sh</em>, <em>export.sh</em>.<ul>
 <li>all of the terraform configuration files–a declarative, comprehensive representation of our entire application stack:</li>
 <li><em>main.tf</em> - Every terraform configuration has a main.tf. This contains all of the AWS specific (non-F5) environment configuration, including web instances</li>
-<li><em>f5-cloudformation</em>.tf files - A terraform file that takes the officially supported CloudFormation template hosted at: <a class="reference external" href="https://s3.amazonaws.com/f5-cft/f5-existing-stack-bigiq-1nic-bigip.templat">https://s3.amazonaws.com/f5-cft/f5-existing-stack-bigiq-1nic-bigip.templat</a> and stuffs all of the prerequisite parameters so we don’t have to do it manually.</li>
+<li><em>f5-cloudformation</em>.tf files - A terraform file that takes the officially supported CloudFormation template hosted in the official F5 github repo: <a class="reference external" href="https://github.com/F5Networks/f5-aws-cloudformation">https://github.com/F5Networks/f5-aws-cloudformation</a> and stuffs all of the prerequisite parameters so we don’t have to do it manually.</li>
 <li><em>outputs.tf</em> - Any variable in the outputs.tf file can be rendered to the console with ‘terraform output’ and is exposed to other command line tools.</li>
 <li><em>vars.tf</em> - Variables for terraform.</li>
 </ul>

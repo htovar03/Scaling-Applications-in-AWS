@@ -3,9 +3,8 @@ Connecting to the Lab
 
 .. important:: Your student account, and short URL path will be announced at the start of the lab.
 
-- The lab environment consists of both a simulated "on-premises" datacenter hosted in Ravello and a public cloud environment hosted in AWS.
-- Though the public cloud environment runs on a shared AWS account, every student will build and work in a dedicated AWS VPC.
 - For this lab, a Linux Remote Desktop jump host will be provided as a consistent starting point.
+- Though the public cloud environment runs on a shared AWS account, every student will build and work in a dedicated AWS VPC.
 - A convenient way to work through the lab is to split your screen in half: one side for the lab environment, the other side for the lab guide.
 
 Lab Variables
@@ -75,7 +74,7 @@ Copy and paste the commands below to accomplish the steps above.
 
 .. code-block:: bash
 
-   export emailid=user99@f5lab.com
+   export emailid=user55@f5lab.com
    export shortUrl=abc123
    printenv
 
@@ -101,7 +100,7 @@ Copy and paste the commands below to accomplish the steps above.
 .. code-block:: bash
 
    cd ~
-   git clone -b dev2 https://github.com/TonyMarfil/marfil-f5-terraform
+   git clone -b dev https://github.com/TonyMarfil/marfil-f5-terraform
    cd ~/marfil-f5-terraform/
    source start
 
@@ -149,9 +148,9 @@ Terraform apply.
 F5 AWS Lab Test application
 ---------------------------
 
-Note the alb_dns_name value in terraform output. HTTPS to this site from any browser to see the example lab application.
+Note the elb_dns_name value in terraform output. HTTP to this site from any browser to see the example lab application.
 
-.. image:: ./images/9_alb_demo_site.png
+.. image:: ./images/9_http_elb_site.png
   :scale: 50%
 
 What just happened?
@@ -165,7 +164,7 @@ When you clone the git repository, you are pulling down a current version of the
 
   - all of the terraform configuration files--a declarative, comprehensive representation of our entire application stack:
   - *main.tf* - Every terraform configuration has a main.tf. This contains all of the AWS specific (non-F5) environment configuration, including web instances
-  - *f5-cloudformation*.tf files - A terraform file that takes the officially supported CloudFormation template hosted at: https://s3.amazonaws.com/f5-cft/f5-existing-stack-bigiq-1nic-bigip.templat and stuffs all of the prerequisite parameters so we don't have to do it manually.
+  - *f5-cloudformation*.tf files - A terraform file that takes the officially supported CloudFormation template hosted in the official F5 github repo: https://github.com/F5Networks/f5-aws-cloudformation and stuffs all of the prerequisite parameters so we don't have to do it manually.
   - *outputs.tf* - Any variable in the outputs.tf file can be rendered to the console with 'terraform output' and is exposed to other command line tools.
   - *vars.tf* - Variables for terraform.
 - Handy utilities to help move the lab along with minimum fuss: *password-reset*.

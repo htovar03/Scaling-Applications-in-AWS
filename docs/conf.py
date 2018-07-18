@@ -5,10 +5,10 @@
 # ------------
 #
 # REQUIRED: Your class/lab name
-classname = "F5 Public Cloud Architectures - F5 in AWS II"
+classname = "Public Cloud Architectures I: Deploying F5 BIG-IP Virtual Edition in AWS"
 
 # OPTIONAL: The URL to the GitHub Repository for this class
-github_repo = "https://github.com/TonyMarfil/f5-agility-labs-f5-in-aws-2"
+github_repo = "https://github.com/TonyMarfil/f5-agility-labs-f5-in-aws-1"
 
 # OPTIONAL: Google Analytics
 # googleanalytics_id = 'UA-85156643-4'
@@ -63,8 +63,8 @@ if 'github_repo' in locals() and len(github_repo) > 0:
     rst_prolog += """
 .. |repoinfo| replace:: The content contained here leverages a full DevOps CI/CD
               pipeline and is sourced from the GitHub repository at %s.
-              Bugs and Requests for enhancements can be made using by
-              opening an Issue within the repository.
+              Bugs and Requests for enhancements can be made by
+              opening an issue within the repository.
 """ % (github_repo)
 else:
     rst_prolog += ".. |repoinfo| replace:: \ \n"
@@ -126,7 +126,7 @@ master_doc = 'index'
 
 # General information about the project.
 project = classname
-copyright = u'2017, F5 Networks, Inc.'
+copyright = u'2018, F5 Networks, Inc.'
 author = u'F5 Networks, Inc.'
 
 # The version info for the project you're documenting, acts as replacement for
