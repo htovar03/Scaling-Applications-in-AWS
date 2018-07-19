@@ -1,7 +1,7 @@
-F5 Networks AWS WAF Rules
-=========================
+Explore the F5 Big-IP Virtual Editions Deployed
+===============================================
 
-This lab will use the lab environment created previously to protect our application with AWS WAF Rules.
+In this lab we'll take a close look at the Big-IP Virtual Editions deployed.
 
 .. toctree::
    :maxdepth: 1

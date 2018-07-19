@@ -1,73 +1,94 @@
-Apply F5 Networks WAF Rules to an AWS Application Load Balancer
----------------------------------------------------------------
+Explore the F5 Big-IP Virtual Editions Deployed
+-----------------------------------------------
 
-1. From the AWS Console, navigate to Services => Compute => EC2 => LOAD BALANCING => Load Balancers. In the search filter enter your username. You should see two load balancers. One named tf-alb-\* is your newly created AWS application load balancer. Highlight the 'Description' tab. Note Scheme: internate-facing, Type: application and the AWS WAF Web ACL: has no web acl applied. Preconfigured Web-ACLs are offered by F5, offer protection against common OWASP top 10 style attacks, and can be deployed on any ALB. Functionality is a small subset of market-leading F5 WAF running on a Big-IP VE.
+From the Super-NetOps terminal, run the handy lab-info utility. Confirm that "MCPD is up, System Ready" for all three of your instances.
 
-.. image:: ./images/1_alb.png
+.. code-block:: bash
+
+   lab-info
+
+.. image:: ./images/1_mcp_up.png
   :scale: 50%
 
-2. Highlight the Listeners tab. A listener is ready to receive traffic on HTTPS: 443. A TLS Certificate was installed as part of our deployment and the ALB is terminating TLS. An AWS application load balancer terminating TLS is a prerequisite for deploying WAF rules.
+.. attention ::
+   
+   Do not attempt to reset the Big-IP password until **MCPD is up, System Ready**.
 
-.. image:: ./images/2_alb_listener_https_443.png
+Initially, you can only login to an F5 Big-IP VE in AWS via SSH using an SSH key. You will have to enable admin and root password access. Invoke the reset-password utility with the IP address of each of your Big-IP VE's as the argument. **REPLACE THE x.x.x.x PLACEHOLDER WITH THE MANAGEMENT IP ADDRESSES OF YOUR THREE F5 BIG-IP VE'S. This will enable the admin account on all three of your Big-IP's and change the password to the value of the shortUrl.**
+
+.. code-block:: bash
+   
+   reset-password x.x.x.x
+   reset-password y.y.y.y
+   reset-password z.z.z.z
+
+  
+Run ``terraform output`` and note the value of elb_dns_name.
+
+.. code-block:: bash
+
+   terraform output
+
+Open a new tab in the Firefox browser. HTTP to elb_dns_name. Confirm the sample application is up.
+
+.. image:: ./images/9_http_elb_site.png
+  :scale: 50%
+  
+Open a new tab in the Firefox browser. HTTPS to the MGMT URL of BIG-IP Autoscale Instance. Don't miss management port is :8443!
+
+.. code-block:: bash
+   
+   lab-info
+
+.. attention ::
+
+   This lab makes use of insecure self-signed certificates. Bypass the warnings by clicking on “Confirm Security Exception”.
+
+.. image:: ./images/2_cert_warning.png
   :scale: 50%
 
-3. From the AWS Console, navigate to Services => Security, Identity & Compliance => WAF & Shield.
+Login with Username: admin Password: value of shortUrl.
 
-.. image:: ./images/3_aws_waf_shield.png
+.. image:: ./images/3_https_login.png
   :scale: 50%
 
-4. In the left hand navigation pane, click on Marketplace. Prior to deploying F5 WAF Rules for AWS, you need to subscribe to the service and agree to the AWS subscription agreement. This has been done for you already. F5 offers three collections of WAF rules:
-
-- F5 Web Application CVE Signatures For AWS WAF
-- F5 Bot Detection Signatures For AWS WAF
-- AWS WAF - Web Exploits Rules by F5
-
-...read through the Details for a summary of the protection included in each category.
-
-.. image:: ./images/4_f5_waf_rules_marketplace.png
+.. image:: ./images/4_https_waf.png
   :scale: 50%
 
-5. In the left hand navigation pane, click on "Web ACLs" => "Create web ACL".
+Main => System => Resource Provision. Note an F5 WAF is provisioned for both LTM and ASM.
 
-6. Fill in the "Name web ACL" fields. The example screenshot is for user99. Carefully fill in the fields with your unique user details.
-
-+------------------------------------------+-------------------------------------------------------------------+
-| Parameter                                | value                                                             |
-+==========================================+===================================================================+
-| Web ACL name*                            | userXXwebacl (i.e user99webacl)                                   |
-+------------------------------------------+-------------------------------------------------------------------+
-| CloudWatch metric name*                  | userXXwebacl (i.e user99webacl)                                   |
-+------------------------------------------+-------------------------------------------------------------------+
-| Region*                                  | us-east-1                                                         |
-+------------------------------------------+-------------------------------------------------------------------+
-| AWS resource to associate                | select your existing alb from the dropdown: tf-alb-userXXf5labcom |
-+------------------------------------------+-------------------------------------------------------------------+
-
-...click Next.
-
-.. image:: ./images/5_name_web_acl.png
+.. image:: ./images/5_waf_provisioned.png
   :scale: 50%
 
-7. Accept all defaults in Step 2: and click Next.
+Main => Security => Application Security => Policies List. A starter "linux-low" policy has been deployed.
 
-8. Step 3: Select F5 Bot Detection Singatures, Default action "Allow all requests...', click on "Review and create".
-
-.. image:: ./images/6_create_rules.png
+.. image:: ./images/6_waf_policy_1.png
   :scale: 50%
 
-9. Step 4: Assign your alb resource to use this web acl. Click "Confirm and create".
+Click on "Learning and Blocking" settings to see exactly what a "linux-low" policy consists of. This starter policy is often times imported in to Big-IQ for central management.
 
-.. image:: ./images/7_review_and_create.png
+.. image:: ./images/7_waf_policy_2.png
   :scale: 50%
 
-10. From the AWS Console, navigate to Services => Compute => EC2 => LOAD BALANCING => Load Balancers. Highlight your alb. Confirm the AWS WAF WEb ACL: shows your web acl applied.
+Local Traffic => Virtual Server => Properties. A virtual server with a "catch-all" listener of 0.0.0.0/0 has been deployed.
 
-11. Click the copy icon next to the DNS name.
-
-.. image:: ./images/8_web_acl_applied.png
+.. image:: ./images/8_waf_virtual_server.png
   :scale: 50%
 
-12. Connect from a browser via https to the dns name copied and confirm your application is still up but now protected against Bot Attacks!
+The "linux-low" security policy is attached to this virtual server.
 
-.. image:: ./images/9_alb_demo_site.png
+.. image:: ./images/9_waf_policy_enabled.png
+  :scale: 50%
+
+From the Super-NetOps terminal run "lab-info" and copy the value for WAF ELB -> URL. Open a new browser tab and HTTPS to the WAF ELB URL. Your sample applicaiton is protected behind an F5 WAF.
+
+.. image:: ./images/11_terraform_waf_url.png
+  :scale: 50%
+
+.. image:: ./images/12_https_waf.png
+  :scale: 50%
+
+Login to either Big-IP1 or Big-IP2. Main => iApps => Application Services. The Cross-AZ HA Big-IP has been deployed with the F5 AWS HA iApp.
+
+.. image:: ./images/13_ha_iapp.png
   :scale: 50%

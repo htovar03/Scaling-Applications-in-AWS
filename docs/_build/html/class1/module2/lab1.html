@@ -51,7 +51,7 @@
     <script type="text/javascript" src="../../_static/doctools.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="2.3. F5 Networks AWS WAF Rules" href="../module3/module3.html" />
+    <link rel="next" title="2.3. Explore the F5 Big-IP Virtual Editions Deployed" href="../module3/module3.html" />
     <link rel="prev" title="2.2. Exploring AWS" href="module2.html" />
   </head><body>
   <div id="clouddocs-header"></div>
@@ -76,6 +76,10 @@
         <span class="nav-sidebartoc">
             <ul>
 <li><a class="reference internal" href="#">2.2.1. Explore the F5 / AWS lab environment</a></li>
+<li><a class="reference internal" href="#cloudformation">2.2.2. CloudFormation</a></li>
+<li><a class="reference internal" href="#ec2">2.2.3. EC2</a></li>
+<li><a class="reference internal" href="#vpc">2.2.4. VPC</a></li>
+<li><a class="reference internal" href="#github">2.2.5. Github</a></li>
 </ul>
 
          </span>
@@ -88,7 +92,7 @@
 <li class="toctree-l1 current"><a class="reference internal" href="../class1.html">2. Class - Public Cloud Architectures I: Deploying F5 BIG-IP Virtual Edition in AWS</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="../module1/module1.html">2.1. Infrastructure As Code</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="module2.html">2.2. Exploring AWS</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../module3/module3.html">2.3. F5 Networks AWS WAF Rules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../module3/module3.html">2.3. Explore the F5 Big-IP Virtual Editions Deployed</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../module4/module4.html">2.4. Create a Virtual Server to Protect your Web Applications</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../module5/module5.html">2.5. Declarative Virtual Server with Application Services Extension 3</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../module6/module6.html">2.6. F5 Networks IPSec VPN to AWS</a></li>
@@ -123,13 +127,20 @@
     
   <div class="section" id="explore-the-f5-aws-lab-environment">
 <h1>2.2.1. Explore the F5 / AWS lab environment<a class="headerlink" href="#explore-the-f5-aws-lab-environment" title="Permalink to this headline">¶</a></h1>
-<ol class="arabic simple">
-<li>From the Linux desktop, click “Activities” in the upper-left-hand corner to launch the Dock.</li>
-</ol>
-<a class="reference internal image-reference" href="../../_images/0_terminal.png"><img alt="../../_images/0_terminal.png" src="../../_images/0_terminal.png" style="width: 960.0px; height: 540.0px;" /></a>
-<ol class="arabic simple" start="2">
-<li>Launch the Firefox browser. Click on the bookmark for the Amazon AWS Console link in the upper-left-hand corner. Login with emailid as the username and shortUrl as password.</li>
-</ol>
+<p>Your instructor will share a view of the Big-IQ License Manager hosted on AWS. The class will see all of the instances dynamically licensed through Big-IQ.</p>
+<p>When deploying to AWS you have flexible licensing options:</p>
+<ul class="simple">
+<li>Bring York Own License (BYOL) - can be transferred from one virtual edition environment to another (i.e. VMWare =&gt; AWS)</li>
+<li>Hourly - Launch an instance from the AWS self-service Marketplace portal and pay only for metered hourly use.</li>
+<li>Subscription - <strong>This is the option used in this lab</strong>. Every Big-IP launched will query the Big-IQ License Manager for a license. From Big-IQ we can revoke licenses as well.</li>
+<li>Enterprise License Agreement</li>
+</ul>
+<div class="admonition attention">
+<p class="first admonition-title">Attention</p>
+<p class="last">Below is a snapshot of the Big-IQ License Manager dynamically licensing devices in AWS. You’re instructor can show this to the class during a lab session.</p>
+</div>
+<a class="reference internal image-reference" href="../../_images/0a_bigiq_licenses.png"><img alt="../../_images/0a_bigiq_licenses.png" src="../../_images/0a_bigiq_licenses.png" style="width: 960.0px; height: 540.0px;" /></a>
+<p>Launch the Firefox browser. Click on the bookmark for the Amazon AWS Console link in the upper-left-hand corner. Login with emailid as the username and shortUrl as password.</p>
 <table border="1" class="docutils">
 <colgroup>
 <col width="33%" />
@@ -157,77 +168,106 @@
 <p class="first admonition-title">Attention</p>
 <p class="last">In the upper right-hand corner, ensure you are in the correct region. For example: N. Virginia region (us-east-1) is the default.</p>
 </div>
-<ol class="arabic simple" start="3">
-<li>Navigate to Services =&gt; Management Tools =&gt; CloudFormation. In the search field type your user account name (i.e user99). You should see your CloudFormation deployment details.</li>
-</ol>
+<a class="reference internal image-reference" href="../../_images/2_region_check.png"><img alt="../../_images/2_region_check.png" src="../../_images/2_region_check.png" style="width: 960.0px; height: 540.0px;" /></a>
+</div>
+<div class="section" id="cloudformation">
+<h1>2.2.2. CloudFormation<a class="headerlink" href="#cloudformation" title="Permalink to this headline">¶</a></h1>
+<p>Navigate to Services =&gt; Management Tools =&gt; CloudFormation. In the search field type your user account name (i.e user99). You should see your CloudFormation deployment details. You launched two CloudFormation templates.</p>
+<a class="reference internal image-reference" href="../../_images/3_cloudformation_stacks.png"><img alt="../../_images/3_cloudformation_stacks.png" src="../../_images/3_cloudformation_stacks.png" style="width: 960.0px; height: 540.0px;" /></a>
+<ul class="simple">
+<li>ha-userxxf5labcom-vpc-xxxxxxxx - Is the Cross-Availabilty-Zone deployment well documented in the F5 Github repository:
+<a class="reference external" href="https://github.com/F5Networks/f5-aws-cloudformation/tree/master/supported/failover/across-net/via-api/3nic/existing-stack/bigiq">https://github.com/F5Networks/f5-aws-cloudformation/tree/master/supported/failover/across-net/via-api/3nic/existing-stack/bigiq</a></li>
+</ul>
+<a class="reference internal image-reference" href="../../_images/cft_cross-az-ha.png"><img alt="../../_images/cft_cross-az-ha.png" src="../../_images/cft_cross-az-ha.png" style="width: 471.0px; height: 320.0px;" /></a>
+<ul class="simple">
+<li>waf-userXXf5labcom-vpc-xxxxxxxx - Is the Autoscale WAF deployment well documented in the F5 Github repository:
+<a class="reference external" href="https://github.com/F5Networks/f5-aws-cloudformation/tree/master/supported/autoscale/waf/via-lb/1nic/existing-stack/bigiq">https://github.com/F5Networks/f5-aws-cloudformation/tree/master/supported/autoscale/waf/via-lb/1nic/existing-stack/bigiq</a></li>
+</ul>
+<a class="reference internal image-reference" href="../../_images/cft_autoscale_waf.png"><img alt="../../_images/cft_autoscale_waf.png" src="../../_images/cft_autoscale_waf.png" style="width: 485.0px; height: 310.0px;" /></a>
 <ul class="simple">
 <li>Click the Events tab. The F5 CloudFormation template records every succesfull or failed event here. Look for the final “CREATE_COMPLETE” at the top. This indicates all went well.</li>
 </ul>
-<a class="reference internal image-reference" href="../../_images/2_cft_events.png"><img alt="../../_images/2_cft_events.png" src="../../_images/2_cft_events.png" style="width: 960.0px; height: 540.0px;" /></a>
-<ul class="simple">
-<li>Click on the Parameters tab. We used terraform to stuff all of the necesary parameters into the CloudFormation template. Here you can see the CloudFormation parameter name and value provided.</li>
-</ul>
-<a class="reference internal image-reference" href="../../_images/3_cft_parameters.png"><img alt="../../_images/3_cft_parameters.png" src="../../_images/3_cft_parameters.png" style="width: 960.0px; height: 540.0px;" /></a>
+<a class="reference internal image-reference" href="../../_images/5_cft_events.png"><img alt="../../_images/5_cft_events.png" src="../../_images/5_cft_events.png" style="width: 960.0px; height: 540.0px;" /></a>
 <ul class="simple">
 <li>Click on the Outputs tab. When CloudFormation deployments complete successfully, they can export key value pairs you can use to integrate other automation tools. For example, you can query these CloudFormation outputs to find out to which region, availability zone, private IPs, public IPs your F5 Big-IP Virtual Edition instance has been assigned.</li>
 </ul>
-<a class="reference internal image-reference" href="../../_images/5_cft_resources.png"><img alt="../../_images/5_cft_resources.png" src="../../_images/5_cft_resources.png" style="width: 960.0px; height: 540.0px;" /></a>
+<a class="reference internal image-reference" href="../../_images/6_cft_outputs.png"><img alt="../../_images/6_cft_outputs.png" src="../../_images/6_cft_outputs.png" style="width: 960.0px; height: 540.0px;" /></a>
 <ul class="simple">
 <li>Click on the Resources tab. Here we see a map (resource type to unqique id) of all the AWS resources that were deployed from the CloudFormation template.</li>
 </ul>
-<a class="reference internal image-reference" href="../../_images/5_cft_resources.png"><img alt="../../_images/5_cft_resources.png" src="../../_images/5_cft_resources.png" style="width: 960.0px; height: 540.0px;" /></a>
-<ol class="arabic simple" start="4">
-<li>Navigate to Services =&gt; Compute =&gt; EC2 =&gt; INSTANCES =&gt; Instances. Enter your username in the search field (i.e. user99). The web application is hosted on webaz1.0 in one availability zone and webaz2.0 in another availability zone. Highlight web-az1.0. In the “Description” tab below, note the availability zone. Highlight web-az2.0 and do the same.</li>
-</ol>
-<a class="reference internal image-reference" href="../../_images/6_aws_console_search_filter.png"><img alt="../../_images/6_aws_console_search_filter.png" src="../../_images/6_aws_console_search_filter.png" style="width: 960.0px; height: 540.0px;" /></a>
-<ol class="arabic simple" start="5">
-<li>A single Big-IP Virtual Edition is running on an AWS m4.xlarge intance. Highlight your Big-IP, expand the “Description” tab below. Your instance details are here including:<ul>
-<li>Instance type</li>
-<li>Elastic IP</li>
-<li>Key pair name</li>
-<li>Private IPs</li>
-<li>VPC ID</li>
-<li>Network interface</li>
+<a class="reference internal image-reference" href="../../_images/7_cft_resources.png"><img alt="../../_images/7_cft_resources.png" src="../../_images/7_cft_resources.png" style="width: 960.0px; height: 540.0px;" /></a>
+<ul class="simple">
+<li>Click the Events tab. The F5 CloudFormation template records every succesfull or failed event here. Look for the final “CREATE_COMPLETE” at the top. This indicates all went well.</li>
+</ul>
+<a class="reference internal image-reference" href="../../_images/8_cft_events.png"><img alt="../../_images/8_cft_events.png" src="../../_images/8_cft_events.png" style="width: 960.0px; height: 540.0px;" /></a>
+<ul class="simple">
+<li>Click on the Parameters tab. We used terraform to stuff all of the necesary parameters into the CloudFormation template. Here you can see the CloudFormation parameter name and value provided.</li>
+</ul>
+<a class="reference internal image-reference" href="../../_images/9_cft_parameters.png"><img alt="../../_images/9_cft_parameters.png" src="../../_images/9_cft_parameters.png" style="width: 960.0px; height: 540.0px;" /></a>
+</div>
+<div class="section" id="ec2">
+<h1>2.2.3. EC2<a class="headerlink" href="#ec2" title="Permalink to this headline">¶</a></h1>
+<p>Navigate to Services =&gt; Compute =&gt; EC2 =&gt; INSTANCES =&gt; Instances. Enter your username in the search field (i.e. user99). The web application is hosted on webaz1.0 in one availability zone and webaz2.0 in another availability zone. Highlight web-az1.0.</p>
+<a class="reference internal image-reference" href="../../_images/10_ec2_instances.png"><img alt="../../_images/10_ec2_instances.png" src="../../_images/10_ec2_instances.png" style="width: 960.0px; height: 540.0px;" /></a>
+<ul class="simple">
+<li>In the “Description” tab below, note the availability zone. Highlight web-az2.0 and do the same.</li>
+</ul>
+<a class="reference internal image-reference" href="../../_images/11_ec2_instance_description.png"><img alt="../../_images/11_ec2_instance_description.png" src="../../_images/11_ec2_instance_description.png" style="width: 960.0px; height: 540.0px;" /></a>
+<ul class="simple">
+<li>Take a look at the tags big-IP1-ha… has been assigned. In public cloud deployments you can use tags (key-value pairs) to group your devices.</li>
+</ul>
+<a class="reference internal image-reference" href="../../_images/12_ec2_instance_tags.png"><img alt="../../_images/12_ec2_instance_tags.png" src="../../_images/12_ec2_instance_tags.png" style="width: 960.0px; height: 540.0px;" /></a>
+<ul class="simple">
+<li>Cloud-init. Version 13 of Big-IP supports cloud-init. Right click on BIGIP1 =&gt; Instance Settings =&gt; View/Change User Data. Cloud-init is the industry standard way to inject commands into an F5 cloud image to automate all aspects of the on-boarding process: <a class="reference external" href="https://cloud-init.io/">https://cloud-init.io/</a>.</li>
+</ul>
+<a class="reference internal image-reference" href="../../_images/13_cloud_init.png"><img alt="../../_images/13_cloud_init.png" src="../../_images/13_cloud_init.png" style="width: 960.0px; height: 540.0px;" /></a>
+<p>Navigate to Services =&gt; Compute =&gt; EC2 =&gt; # Key Pairs. Type your username in the search field (i.e. user99). You will see the ssh key that was created for you and upload to AWS. By default, F5 Big-IP VE appliances deployed to AWS do not have any default root or admin account access. You have to enable or create these accounts. Initially, you can only connect via ssh using your private key. From the Super-NetOps terminal, see if you can find the private key in your home directory.</p>
+<a class="reference internal image-reference" href="../../_images/14_keypair.png"><img alt="../../_images/14_keypair.png" src="../../_images/14_keypair.png" style="width: 960.0px; height: 540.0px;" /></a>
+<p>Navigate to Services =&gt; Compute =&gt; EC2 =&gt; LOAD BALANCING =&gt; Load Balancers. In the search filter enter your username. You should see two load balancers. One named tf-elb-* is your newly created AWS load balancer.</p>
+<a class="reference internal image-reference" href="../../_images/15_elb_description.png"><img alt="../../_images/15_elb_description.png" src="../../_images/15_elb_description.png" style="width: 960.0px; height: 540.0px;" /></a>
+<ul class="simple">
+<li>Highlight the ‘Description’ tab. Note:<ul>
+<li>Scheme: internate-facing</li>
+<li>Type: Classic</li>
 </ul>
 </li>
-</ol>
-<a class="reference internal image-reference" href="../../_images/7_ec2_description.png"><img alt="../../_images/7_ec2_description.png" src="../../_images/7_ec2_description.png" style="width: 960.0px; height: 540.0px;" /></a>
-<div class="admonition attention">
-<p class="first admonition-title">Attention</p>
-<p class="last">We deployed a single-NIC Big-IP. A curious difference from traditional datacenter two and three NIC deployments is that single-NIC cloud instances will often share the same IP address for management, self-ip and virtual server. In our deployment: tcp 22 to ssh to the self-ip for management, tcp 8443 to https to the config utility for management, and tcp 80, 443 will evenutally be the virtual server / listener for http/https application traffic.</p>
+</ul>
+<a class="reference internal image-reference" href="../../_images/16_elb_instances.png"><img alt="../../_images/16_elb_instances.png" src="../../_images/16_elb_instances.png" style="width: 960.0px; height: 540.0px;" /></a>
+<ul class="simple">
+<li>Click the “Health Check” tab =&gt; [Edit health Check]. The classic load-balaner is limited to basic health checks.</li>
+</ul>
+<a class="reference internal image-reference" href="../../_images/17_elb_health_checks_limited.png"><img alt="../../_images/17_elb_health_checks_limited.png" src="../../_images/17_elb_health_checks_limited.png" style="width: 960.0px; height: 540.0px;" /></a>
+<ul class="simple">
+<li>Click the “Listeners” tab =&gt; [Edit]. The classic load-balancer is limited to HTTP, HTTPS, TCP and SSL (no UDP).</li>
+</ul>
+<a class="reference internal image-reference" href="../../_images/18_elb_listeners_limited.png"><img alt="../../_images/18_elb_listeners_limited.png" src="../../_images/18_elb_listeners_limited.png" style="width: 960.0px; height: 540.0px;" /></a>
+<p>Navigate to Services =&gt; Compute =&gt; EC2 =&gt; AUTO SCALING =&gt; Auto Scaling Group. Highligh the “Activity History” tab. You can the autoscale WAF CloudFormation template created an auto scaling group. Read the Description and Cause.</p>
+<a class="reference internal image-reference" href="../../_images/19_asg_activity.png"><img alt="../../_images/19_asg_activity.png" src="../../_images/19_asg_activity.png" style="width: 960.0px; height: 540.0px;" /></a>
+<ul class="simple">
+<li>Click the “Scaling Policies” tab. Read through the polices to understand how the autoscale WAF deployment is programmed to both scale out during a surge and scale in when the surge subsides.</li>
+</ul>
+<a class="reference internal image-reference" href="../../_images/20_asg_scaling_policies.png"><img alt="../../_images/20_asg_scaling_policies.png" src="../../_images/20_asg_scaling_policies.png" style="width: 960.0px; height: 540.0px;" /></a>
+<ul class="simple">
+<li>Click the “Instances” tab. The single instance running the F5 WAF. Notice the instance is “Protectecd from: Scale in”. This means that AWS will guarantee a minimum of one F5 WAF instance is running at all times. If someone where to accidently stop or terminate an instance, this policy would automatically trigger the cration of a new one.</li>
+</ul>
+<a class="reference internal image-reference" href="../../_images/21_asg_instances.png"><img alt="../../_images/21_asg_instances.png" src="../../_images/21_asg_instances.png" style="width: 960.0px; height: 540.0px;" /></a>
 </div>
-<ol class="arabic simple" start="6">
-<li>Cloud-init. Version 13 of Big-IP supports cloud-init. Right click on BIGIP1 =&gt; Instance Settings =&gt; View/Change User Data. Cloud-init is the industry standard way to inject commands into an F5 cloud image to automate all aspects of the on-boarding process: <a class="reference external" href="https://cloud-init.io/">https://cloud-init.io/</a>.</li>
-</ol>
-<a class="reference internal image-reference" href="../../_images/8_f5_user_data.png"><img alt="../../_images/8_f5_user_data.png" src="../../_images/8_f5_user_data.png" style="width: 960.0px; height: 540.0px;" /></a>
-<ol class="arabic simple" start="7">
-<li>Services =&gt; Compute =&gt; EC2 =&gt; LOAD BALANCING =&gt; Load Balancers. In the search filter enter your username. You should see two load balancers. One named tf-alb-* is your newly created AWS application load balancer. Highlight the ‘Description’ tab. Note:</li>
-</ol>
+<div class="section" id="vpc">
+<h1>2.2.4. VPC<a class="headerlink" href="#vpc" title="Permalink to this headline">¶</a></h1>
+<p>Navigate to Services =&gt; Networking &amp; Content Deliver =&gt; VPC. click on VPCs. Enter your username in the search filter (i.e. user99). This is the Virtual Private Cloud (VPC) that has been dedicated to your lab environment.
+Select the Summary tab. You can see the IPv4 CIDR assigned is 10.0.0.0/16. Your on-premises datacenter has been assigned 10.1.0.0/16 to not conflict.</p>
+<a class="reference internal image-reference" href="../../_images/22_vpc.png"><img alt="../../_images/22_vpc.png" src="../../_images/22_vpc.png" style="width: 960.0px; height: 540.0px;" /></a>
+</div>
+<div class="section" id="github">
+<h1>2.2.5. Github<a class="headerlink" href="#github" title="Permalink to this headline">¶</a></h1>
 <ul class="simple">
-<li>Scheme: internate-facing</li>
-<li>Type: application</li>
-<li>AWS WAF Web ACL: has no web acl applied.</li>
+<li>Fully supported F5 Networks Solutions are hosted in the official F5 Networks GitHub repository: <a class="reference external" href="https://github.com/f5networks">https://github.com/f5networks</a></li>
+<li>We are running the lab from the F5 Super-NetOps container: <a class="reference external" href="https://github.com/f5devcentral/f5-super-netops-container">https://github.com/f5devcentral/f5-super-netops-container</a></li>
+<li>AWS CloudFormation templates: <a class="reference external" href="https://github.com/F5Networks/f5-aws-cloudformation">https://github.com/F5Networks/f5-aws-cloudformation</a></li>
+<li>Native template formats are also available for Microsoft Azure (arm templates): <a class="reference external" href="https://github.com/F5Networks/f5-azure-arm-templates">https://github.com/F5Networks/f5-azure-arm-templates</a></li>
+<li>Native template formats are also available for Google Cloud Platform (gdm templates): <a class="reference external" href="https://github.com/F5Networks/f5-google-gdm-templates">https://github.com/F5Networks/f5-google-gdm-templates</a></li>
 </ul>
-<a class="reference internal image-reference" href="../../_images/9_alb.png"><img alt="../../_images/9_alb.png" src="../../_images/9_alb.png" style="width: 960.0px; height: 540.0px;" /></a>
-<ul class="simple">
-<li>Highlight the Listeners tab. A listener is ready to receive traffic on HTTPS: 443. A TLS Certificate was installed as part of our deployment and the ALB is terminating TLS.</li>
-</ul>
-<a class="reference internal image-reference" href="../../_images/10_alb_listener_https_443.png"><img alt="../../_images/10_alb_listener_https_443.png" src="../../_images/10_alb_listener_https_443.png" style="width: 960.0px; height: 540.0px;" /></a>
-<ul class="simple">
-<li>Select the other load-balancer named tf-elb-asg-*. This is a standard TCP load balancer. Note Type: classic. This load-balancer is not in service yet.</li>
-</ul>
-<a class="reference internal image-reference" href="../../_images/11_elb_for_bigip_ce.png"><img alt="../../_images/11_elb_for_bigip_ce.png" src="../../_images/11_elb_for_bigip_ce.png" style="width: 960.0px; height: 540.0px;" /></a>
-<ol class="arabic simple" start="8">
-<li>Navigate to Services =&gt; Networking &amp; Content Deliver =&gt; VPC. click on VPCs. Enter your username in the search filter (i.e. user99). This is the Virtual Private Cloud (VPC) that has been dedicated to your lab environment.</li>
-</ol>
-<ul class="simple">
-<li>Select the Summary tab. You can see the IPv4 CIDR assigned is 10.0.0.0/16. Your on-premises datacenter has been assigned 10.1.0.0/16 to not conflict.</li>
-</ul>
-<a class="reference internal image-reference" href="../../_images/12_vpc.png"><img alt="../../_images/12_vpc.png" src="../../_images/12_vpc.png" style="width: 960.0px; height: 540.0px;" /></a>
-<ol class="arabic simple" start="9">
-<li>From the VPC Dashboard, Click on VPN Connections in the left-hand navigation pane. Enter your username in the search filter (i.e. user99). A virtual Private Gateway has been created and attached to your VPC. We will later use this VPN Gateway to create and IPSec tunnel between our on-premises environment and our AWS VPC.</li>
-</ol>
-<a class="reference internal image-reference" href="../../_images/13_vpn_gateway.png"><img alt="../../_images/13_vpn_gateway.png" src="../../_images/13_vpn_gateway.png" style="width: 960.0px; height: 540.0px;" /></a>
+<a class="reference internal image-reference" href="../../_images/f5-github.png"><img alt="../../_images/f5-github.png" src="../../_images/f5-github.png" style="width: 689.5px; height: 665.0px;" /></a>
 </div>
 
 
@@ -239,7 +279,7 @@
         <a href="module2.html" title="2.2. Exploring AWS" accesskey="p" class="btn btn-primary pull-left"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i> Previous</a>
        
        
-          <a href="../module3/module3.html" title="2.3. F5 Networks AWS WAF Rules" accesskey="n" class="btn btn-primary pull-right">Next <i class="fa fa-arrow-circle-right" aria-hidden="true"></i></a>
+          <a href="../module3/module3.html" title="2.3. Explore the F5 Big-IP Virtual Editions Deployed" accesskey="n" class="btn btn-primary pull-right">Next <i class="fa fa-arrow-circle-right" aria-hidden="true"></i></a>
        
      </div>
      </div>
