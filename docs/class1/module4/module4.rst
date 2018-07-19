@@ -1,7 +1,11 @@
-Create a Virtual Server to Protect your Web Applications
-========================================================
+Extending and Securing your Cloud
+---------------------------------
 
-Create a virtual server.
+This lab will use the Lab Environment created previously to explore other capabilities including
+
+- Service Discovery
+- Failover Across Availability Zones
+- Triggering an Auto Scale event
 
 .. toctree::
    :maxdepth: 1

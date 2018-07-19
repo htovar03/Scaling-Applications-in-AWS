@@ -1,7 +1,7 @@
-Declarative Virtual Server with Application Services Extension 3
-================================================================
+Logging to CloudWatch
+=====================
 
-Create a virtual server the newfangled way.
+Comprehensive request and security logging for compliance and troubleshooting.
 
 .. toctree::
    :maxdepth: 1
