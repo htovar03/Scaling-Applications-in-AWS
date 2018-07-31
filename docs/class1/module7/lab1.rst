@@ -1,7 +1,7 @@
 Clean up the lab environment
 ----------------------------
 
-From the Super-NetOps terminal, run the handy lab-info utility. Copy the Big-IP1 MGMT IP.
+Clean up then destroy the environment.
 
 .. code-block:: bash
 
