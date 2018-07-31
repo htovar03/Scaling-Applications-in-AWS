@@ -5,7 +5,7 @@ Your instructor will share a view of the Big-IQ License Manager hosted on AWS. T
 
 When deploying to AWS you have flexible licensing options:
 
-- Bring York Own License (BYOL) - can be transferred from one virtual edition environment to another (i.e. VMWare => AWS)
+- Bring Your Own License (BYOL) - Can be transferred from one Virtual Edition environment to another (i.e. VMWare => AWS)
 - Hourly - Launch an instance from the AWS self-service Marketplace portal and pay only for metered hourly use.
 - Subscription - **This is the option used in this lab**. Every Big-IP launched will query the Big-IQ License Manager for a license. From Big-IQ we can revoke licenses as well.
 - Enterprise License Agreement
