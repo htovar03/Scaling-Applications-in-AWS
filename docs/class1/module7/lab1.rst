@@ -1,7 +1,7 @@
 Clean up the lab environment
 ----------------------------
 
-Clean up then destroy the environment.
+From the Super-NetOps terminal, clean up, then destroy the environment.
 
 .. code-block:: bash
 
