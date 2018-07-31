@@ -96,15 +96,11 @@
 <li class="toctree-l1 current"><a class="reference internal" href="../class1.html">2. Class - Public Cloud Architectures I: Deploying F5 BIG-IP Virtual Edition in AWS</a><ul class="current">
 <li class="toctree-l2 current"><a class="reference internal" href="module1.html">2.1. Infrastructure As Code</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../module2/module2.html">2.2. Exploring AWS</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../module3/module3.html">2.3. F5 Networks AWS WAF Rules</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../module4/module4.html">2.4. Create a Virtual Server to Protect your Web Applications</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../module5/module5.html">2.5. Declarative Virtual Server with Application Services Extension 3</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../module6/module6.html">2.6. F5 Networks IPSec VPN to AWS</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../module7/module7.html">2.7. Big-IQ 6.0 and Application Templates for AWS</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../module8/module8.html">2.8. Big-IP Cloud Edition:</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../module9/module9.html">2.9. Create a Service Scaling Group Application:</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../module_10/module_10.html">2.10. Test Autoscaling</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../module_11/module_11.html">2.11. Clean up environment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../module3/module3.html">2.3. Explore the F5 Big-IP Virtual Editions Deployed</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../module4/module4.html">2.4. Extending and Securing your Cloud</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../module5/module5.html">2.5. Logging to CloudWatch</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../module6/module6.html">2.6. Autoscale WAF</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../module7/module7.html">2.7. Clean Up Environment</a></li>
 </ul>
 </li>
 </ul>
@@ -133,7 +129,7 @@
 <h1>2.1.1. Connecting to the Lab<a class="headerlink" href="#connecting-to-the-lab" title="Permalink to this headline">¶</a></h1>
 <div class="admonition important">
 <p class="first admonition-title">Important</p>
-<p class="last">Your student account, and short URL path will be announced at the start of the lab.</p>
+<p class="last">Your student account, and shortUrl value will be announced at the start of the lab.</p>
 </div>
 <ul class="simple">
 <li>For this lab, a Linux Remote Desktop jump host will be provided as a consistent starting point.</li>
@@ -156,7 +152,7 @@
 </thead>
 <tbody valign="top">
 <tr class="row-even"><td>shortUrl</td>
-<td>Unique Key that provides access to this lab (i.e. abc123)</td>
+<td>Unique key that provides access to this lab (i.e. abc123)</td>
 </tr>
 <tr class="row-odd"><td>emailid</td>
 <td>Account name for each student (i.e. <a class="reference external" href="mailto:user01&#37;&#52;&#48;f5lab&#46;com">user01<span>&#64;</span>f5lab<span>&#46;</span>com</a>)</td>
@@ -169,8 +165,10 @@
 <a class="reference internal image-reference" href="../../_images/1_ravello_portal1.png"><img alt="../../_images/1_ravello_portal1.png" src="../../_images/1_ravello_portal1.png" style="width: 960.0px; height: 540.0px;" /></a>
 <ul class="simple">
 <li>Look for ubuntu1. Note the username / password. Click on <em>rdp</em> link. Download the rdp file. Click on the rdp file to launch a Remote Desktop Session to your client.</li>
-<li>Alternatively, you can copy and paste the ubutu1 IP address into your Remote Desktop client to modify settings.
-- Local Resources =&gt; Keyboard =&gt; Apply Windows key combinations: On the remote computer. This will allow you to quickly toggle (ALT + TAB) between windows inside the Remote Desktop Session.</li>
+<li>Alternatively, you can copy and paste the ubuntu1 IP address into your Remote Desktop client to modify settings.<ul>
+<li>Local Resources =&gt; Keyboard =&gt; Apply Windows key combinations: On the remote computer. This will allow you to quickly toggle (ALT + TAB) between windows inside the Remote Desktop Session.</li>
+</ul>
+</li>
 <li>Login with username / password</li>
 </ul>
 <a class="reference internal image-reference" href="../../_images/2_rdp_logon.png"><img alt="../../_images/2_rdp_logon.png" src="../../_images/2_rdp_logon.png" style="width: 960.0px; height: 540.0px;" /></a>
@@ -194,11 +192,11 @@ default
 <p>Export your student account and short URL path variables.</p>
 <p>Your student account will be used to create an AWS console login and provide unique names for infrastructure that you create in the shared AWS account.</p>
 <p>The short URL path will be used to grant access to the shared AWS account both via the AWS API and as the password for the AWS web console. Replace the emailid and shortUrl values below with the student account name and short URL assigned to you at the start of the lab.</p>
-<p>Copy and paste the commands below to accomplish the steps above.</p>
 <div class="admonition attention">
 <p class="first admonition-title">Attention</p>
 <p class="last"><strong>REPLACE THE EXAMPLE VALUES WITH THE VALUES PROVIDED TO YOU BY YOUR INSTRUCTOR.</strong></p>
 </div>
+<p>Copy and paste the commands below to accomplish the steps above.</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">export</span> <span class="nv">emailid</span><span class="o">=</span>user55@f5lab.com
 <span class="nb">export</span> <span class="nv">shortUrl</span><span class="o">=</span>abc123
 printenv
@@ -260,8 +258,8 @@ git clone -b dev https://github.com/TonyMarfil/marfil-f5-terraform
 <p>This is the TL;DR version of the steps completed.</p>
 <p>When you clone the git repository, you are pulling down a current version of the files you need to get started. These files are hosted on Github, the most popular online revision control repository, and include:</p>
 <ul class="simple">
-<li>Onboarding scripts that create your AWS account and other prerequisites: <em>f5-super-netops-install.sh</em>, <em>addUser.sh</em>, <em>export.sh</em>.<ul>
-<li>all of the terraform configuration files–a declarative, comprehensive representation of our entire application stack:</li>
+<li>Onboarding scripts that create your AWS account and other prerequisites: <em>f5-super-netops-install.sh</em>, <em>addUser.sh</em>, <em>export.sh</em>.</li>
+<li>Terraform configuration files–a declarative, comprehensive representation of our entire application stack:<ul>
 <li><em>main.tf</em> - Every terraform configuration has a main.tf. This contains all of the AWS specific (non-F5) environment configuration, including web instances</li>
 <li><em>f5-cloudformation</em>.tf files - A terraform file that takes the officially supported CloudFormation template hosted in the official F5 github repo: <a class="reference external" href="https://github.com/F5Networks/f5-aws-cloudformation">https://github.com/F5Networks/f5-aws-cloudformation</a> and stuffs all of the prerequisite parameters so we don’t have to do it manually.</li>
 <li><em>outputs.tf</em> - Any variable in the outputs.tf file can be rendered to the console with ‘terraform output’ and is exposed to other command line tools.</li>
@@ -278,7 +276,7 @@ git clone -b dev https://github.com/TonyMarfil/marfil-f5-terraform
 <li>Creates a self-signed SSL certificate for use in deploying https services.</li>
 <li>Sets the default region: us-east-1 (Virginia), ap-southeast-1 (Singapore), etc.</li>
 </ul>
-<p>The terraform files go into effect when you invoke ‘terraform apply’. This step makes use of all of the prerequisites from the step before to build the environment in AWS.</p>
+<p>The terraform files go into effect when you invoke <cite>terraform apply</cite>. This step makes use of all of the prerequisites from the step before to build the environment in AWS.</p>
 </div>
 
 

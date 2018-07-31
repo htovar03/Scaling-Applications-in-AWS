@@ -1,7 +1,7 @@
 Connecting to the Lab
 ----------------------
 
-.. important:: Your student account, and short URL path will be announced at the start of the lab.
+.. important:: Your student account, and shortUrl value will be announced at the start of the lab.
 
 - For this lab, a Linux Remote Desktop jump host will be provided as a consistent starting point.
 - Though the public cloud environment runs on a shared AWS account, every student will build and work in a dedicated AWS VPC.
@@ -15,7 +15,7 @@ The lab will make use of unique variables to provide access to the lab and isola
 ============== ===========================================================
 Variable Name   Variable Value
 ============== ===========================================================
- shortUrl       Unique Key that provides access to this lab (i.e. abc123)
+ shortUrl       Unique key that provides access to this lab (i.e. abc123)
  emailid        Account name for each student (i.e. user01@f5lab.com)
 ============== ===========================================================
 
@@ -27,7 +27,8 @@ Launch Remote Desktop Session to Linux
 
 - Look for ubuntu1. Note the username / password. Click on *rdp* link. Download the rdp file. Click on the rdp file to launch a Remote Desktop Session to your client.
 
-- Alternatively, you can copy and paste the ubutu1 IP address into your Remote Desktop client to modify settings.
+- Alternatively, you can copy and paste the ubuntu1 IP address into your Remote Desktop client to modify settings.
+
   - Local Resources => Keyboard => Apply Windows key combinations: On the remote computer. This will allow you to quickly toggle (ALT + TAB) between windows inside the Remote Desktop Session.
 
 - Login with username / password
@@ -66,11 +67,11 @@ Your student account will be used to create an AWS console login and provide uni
 
 The short URL path will be used to grant access to the shared AWS account both via the AWS API and as the password for the AWS web console. Replace the emailid and shortUrl values below with the student account name and short URL assigned to you at the start of the lab.
 
-Copy and paste the commands below to accomplish the steps above.
-
 .. attention::
 
    **REPLACE THE EXAMPLE VALUES WITH THE VALUES PROVIDED TO YOU BY YOUR INSTRUCTOR.**
+
+Copy and paste the commands below to accomplish the steps above.
 
 .. code-block:: bash
 
@@ -162,11 +163,13 @@ When you clone the git repository, you are pulling down a current version of the
 
 - Onboarding scripts that create your AWS account and other prerequisites: *f5-super-netops-install.sh*, *addUser.sh*, *export.sh*.
 
-  - all of the terraform configuration files--a declarative, comprehensive representation of our entire application stack:
+- Terraform configuration files--a declarative, comprehensive representation of our entire application stack:
+  
   - *main.tf* - Every terraform configuration has a main.tf. This contains all of the AWS specific (non-F5) environment configuration, including web instances
   - *f5-cloudformation*.tf files - A terraform file that takes the officially supported CloudFormation template hosted in the official F5 github repo: https://github.com/F5Networks/f5-aws-cloudformation and stuffs all of the prerequisite parameters so we don't have to do it manually.
   - *outputs.tf* - Any variable in the outputs.tf file can be rendered to the console with 'terraform output' and is exposed to other command line tools.
   - *vars.tf* - Variables for terraform.
+
 - Handy utilities to help move the lab along with minimum fuss: *password-reset*.
 
 The start script takes care of all of the prerequisites to standing up an AWS environment. Precisely:
@@ -177,4 +180,4 @@ The start script takes care of all of the prerequisites to standing up an AWS en
 - Creates a self-signed SSL certificate for use in deploying https services.
 - Sets the default region: us-east-1 (Virginia), ap-southeast-1 (Singapore), etc.
 
-The terraform files go into effect when you invoke 'terraform apply'. This step makes use of all of the prerequisites from the step before to build the environment in AWS.
+The terraform files go into effect when you invoke `terraform apply`. This step makes use of all of the prerequisites from the step before to build the environment in AWS.
