@@ -5,7 +5,7 @@
 # ------------
 #
 # REQUIRED: Your class/lab name
-classname = "Public Cloud Architectures I: Deploying F5 BIG-IP Virtual Edition in AWS"
+classname = "Escalando Aplicaciones en AWS"
 
 # OPTIONAL: The URL to the GitHub Repository for this class
 github_repo = "https://github.com/TonyMarfil/f5-agility-labs-f5-in-aws-1"
