@@ -5,7 +5,7 @@
 # ------------
 #
 # REQUIRED: Your class/lab name
-classname = "Escalando Aplicaciones en AWS"
+classname = "Scaling Applications in AWS (Taught in Spanish)"
 
 # OPTIONAL: The URL to the GitHub Repository for this class
 github_repo = "https://github.com/TonyMarfil/f5-agility-labs-f5-in-aws-1"
